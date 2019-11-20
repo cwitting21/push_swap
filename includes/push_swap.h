@@ -2,23 +2,27 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
-# include <unistd.h>
+# include "../libft/libft.h"
 
-
-typedef struct	s_lst
+typedef struct		s_lst
 {
-	t_stack		*head;
-	t_stack		*prev;
-	t_stack		*next;
-	size_t		size;
-	int			value;
-}				t_lst;
+	int				value;
+	size_t			size;
+	struct s_lst	*head;
+	struct s_lst	*prev;
+	struct s_lst	*next;
+}					t_lst;
 
 
-typedef struct	s_stack
+typedef struct		s_stack
 {
-	t_par		*a;
-	t_par		*b;
-}				t_stack;
+	t_lst			*a;
+	t_lst			*b;
+}					t_stack;
+
+int					validation(int ac, char **av, t_stack *stack);
+t_lst				*new_lst(int value);
+t_lst				*put_lst_end(t_lst *start, t_lst *new);
+
 
 #endif

@@ -1,24 +1,15 @@
 #include "../includes/push_swap.h"
-
-void			initialise(t_stack *stack)
-{
-	stack->a = NULL;
-	stack->a->head = NULL;
-	stack->a->prev = NULL;
-	stack->a->next = NULL;
-	stack->a->size = 0;
-	stack->b = NULL;
-	stack->b->head = NULL;
-	stack->b->prev = NULL;
-	stack->b->next = NULL;
-	stack->b->size = 0;
-}
+#include <stdio.h>
 
 int				main(int ac, char **av)
 {
 	t_stack		stack;
 
-	initialise(&stack);
+	stack.a = NULL;
+	stack.b = NULL;
+	//initialise_stack(&stack);
 	validation(ac, av, &stack);
+	// printf("%d\n", stack.a->next->value);
+	// printf("%d\n", stack.a->next->next->value);
 	return (0);
 }

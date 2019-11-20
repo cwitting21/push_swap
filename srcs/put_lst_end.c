@@ -2,11 +2,11 @@
 
 t_lst				*put_lst_end(t_lst *start, t_lst *new)
 {
-	t_lst		*end;
+	t_lst			*end;
 
-	end = start;
 	if (!start)
 		return (new);
+	end = start;
 	while (end->next != start)
 		end = end->next;
 	end->next = new;
