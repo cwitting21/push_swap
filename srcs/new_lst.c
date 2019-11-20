@@ -7,9 +7,7 @@ t_lst			*new_lst(int value)
 	if (!(new = (t_lst*)malloc(sizeof(t_lst))))
 		return (NULL);
 	new->value = value;
-	new->head = new;
-	new->next = new;
-	new->prev = new;
-	new->size = 0;
+	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
