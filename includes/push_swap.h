@@ -12,18 +12,20 @@ typedef struct		s_lst
 	int				value;
 	struct s_lst	*prev;
 	struct s_lst	*next;
+	size_t			size;
 }					t_lst;
 
 
-// typedef struct		s_stack
-// {
-// 	t_lst			*a;
-// 	t_lst			*b;
-// }					t_stack;
+typedef struct		s_stack
+{
+	t_lst			*a;
+	t_lst			*b;
+}					t_stack;
 
 int					args_to_lst(int ac, char **av, t_lst **head);
 t_lst				*new_lst(int value);
-t_lst				*put_lst_to_end(t_lst *start, t_lst *new);
+int					pb(t_lst **head_a, t_lst **head_b);
+
 
 
 #endif

@@ -1,8 +1,8 @@
 #include "../includes/push_swap.h"
 
-static int			num_is_valid(char *ptr)
+static int		num_is_valid(char *ptr)
 {
-	char	*tmp;
+	char		*tmp;
 
 	tmp = ptr;
 	while (*tmp && !ft_isblank(*tmp))
@@ -22,9 +22,11 @@ static t_lst	*push_lst_to_end(t_lst *head, t_lst *new)
 	{
 		new->next = new;
 		new->prev = new;
+		new->size++;
 		return (new);
 	}
 	end = head;
+	end->size++;
 	while (end->next && end->next != head)
 		end = end->next;
 	end->next = new;
@@ -34,10 +36,10 @@ static t_lst	*push_lst_to_end(t_lst *head, t_lst *new)
 	return (head);
 }
 
-int			valid_args(char *ptr, int ac, char  **av)
+static int			valid_args(char *ptr, int ac, char  **av)
 {
-	int		i;
-	char	*tmp;
+	int				i;
+	char			*tmp;
 
 	i = 0;
 	tmp = ptr;
@@ -72,19 +74,7 @@ int			args_to_lst(int ac, char **av, t_lst **head)
 				while (ft_isblank(*ptr))
 					++ptr;
 				if ((*ptr >= (0 + '0')) && (*ptr <= (9 + '0')))
-			// {
-				// if ((num_is_valid(ptr)))
-				// {
 					(*head = push_lst_to_end(*head, new_lst(ft_atoi(ptr))));
-				// }
-			// }
-				// else
-					// return (0);
-			// new = NULL;
-			// if (!(new = new_lst(ft_atoi(ptr))))
-				// return (0);
-			// if (!(*head = push_lst_to_end(*head, new_lst(ft_atoi(ptr)))))
-				// return (0);
 				while (!ft_isblank(*ptr) && *ptr)
 					++ptr;
 			}

@@ -11,6 +11,7 @@ static void		test_print(t_lst **head)
 		end = end->next;
 	}
 	printf("%d\n", end->value);
+	printf("size = %zu\n", (*head)->size);
 }
 
 int				ft_error()
@@ -22,8 +23,11 @@ int				ft_error()
 int				main(int ac, char **av)
 {
 	t_lst		*head;
-	// t_stack		stack;
+	t_stack		stack;
 
+	stack.a = NULL;
+	stack.b = NULL;
+	// stack.b = NULL;
 	if (ac > 1)
 	{
 		// stack.a = NULL;
@@ -31,7 +35,13 @@ int				main(int ac, char **av)
 		//initialise_stack(&stack);
 		if (!(args_to_lst(ac, av, &head)))
 			return (ft_error());
-		test_print(&head);
+		stack.a = head;
+		test_print(&stack.a);
+		pb(&stack.a, &stack.b);
+		printf("-----STACK A-------\n");
+		test_print(&stack.a);
+		printf("-----STACK B-------\n");
+		test_print(&stack.b);
 	}
 	// printf("%d\n", stack.a->value);
 	// printf("%d\n", stack.a->next->value);
