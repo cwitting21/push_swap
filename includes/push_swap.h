@@ -4,6 +4,7 @@
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include <stdio.h>
+# include <unistd.h>
 
 
 typedef struct		s_lst
@@ -20,7 +21,7 @@ typedef struct		s_lst
 // 	t_lst			*b;
 // }					t_stack;
 
-int					args_to_lst(int ac, char **av/*, t_stack *stack*/);
+int					args_to_lst(int ac, char **av, t_lst **head);
 t_lst				*new_lst(int value);
 t_lst				*put_lst_to_end(t_lst *start, t_lst *new);
 
