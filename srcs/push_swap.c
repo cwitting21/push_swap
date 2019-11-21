@@ -14,6 +14,17 @@ static void		test_print(t_lst **head)
 	printf("size = %zu\n", (*head)->size);
 }
 
+static void		test_print_2(t_lst **head)
+{
+	t_lst		*end;
+
+	end = *head;
+	printf("%d\n", end->value);
+	printf("%d\n", end->next->value);
+	printf("%d\n", end->next->next->value);
+	
+}
+
 int				ft_error()
 {
 	write(1, "Error\n", 6);
@@ -38,10 +49,15 @@ int				main(int ac, char **av)
 		stack.a = head;
 		test_print(&stack.a);
 		pb(&stack.a, &stack.b);
+		pb(&stack.a, &stack.b);
 		printf("-----STACK A-------\n");
 		test_print(&stack.a);
 		printf("-----STACK B-------\n");
 		test_print(&stack.b);
+		// printf("-----TEST A-------\n");
+		// test_print_2(&stack.a);
+		// printf("-----TEST B-------\n");
+		// test_print_2(&stack.b);
 	}
 	// printf("%d\n", stack.a->value);
 	// printf("%d\n", stack.a->next->value);
