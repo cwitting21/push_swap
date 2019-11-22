@@ -23,6 +23,8 @@ static void		stack_a_not_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
 			end_b = end_b->next;
 		(*head_b)->next->prev = end_b;
 		end_b->next = (*head_b)->next;
+		(*head_b) = (*head_b)->next;
+		(*head_b)->size = first->size - 1;
 		first->next = (*head_a);
 		(*head_a)->prev = first;
 		first->prev = end_a;

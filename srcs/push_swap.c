@@ -54,11 +54,14 @@ int				main(int ac, char **av)
 		test_print(&stack.a);
 		pb(&stack.a, &stack.b);
 		pb(&stack.a, &stack.b);
+		pb(&stack.a, &stack.b);
 		// pb(&stack.a, &stack.b);
 		printf("-----STACK A-------\n");
 		test_print(&stack.a);
 		printf("-----STACK B-------\n");
 		test_print(&stack.b);
+		pa(&stack.a, &stack.b);
+		pa(&stack.a, &stack.b);
 		pa(&stack.a, &stack.b);
 		// pa(&stack.a, &stack.b);
 		// printf("111111111\n");
