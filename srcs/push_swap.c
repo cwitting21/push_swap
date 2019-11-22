@@ -64,10 +64,10 @@ int				main(int ac, char **av)
 		test_print(&stack.b);
 		// swap(&stack.a);
 		// ss(&stack.a, &stack.b);
-		rr(&stack.a, &stack.b);
+		// rr(&stack.a, &stack.b);
 		// pa(&stack.a, &stack.b);
 		// rotate(&stack.a);
-
+		rrr(&stack.a, &stack.b);
 		printf("-----STACK A-------\n");
 		test_print(&stack.a);
 		printf("-----STACK B-------\n");

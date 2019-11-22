@@ -29,6 +29,9 @@ int					swap(t_lst **head);
 int         		ss(t_lst **head_a, t_lst **head_b);
 int					rotate(t_lst **head);
 int					rr(t_lst **head_a, t_lst **head_b);
+int					rev_rotate(t_lst **head);
+int					rrr(t_lst **head_a, t_lst **head_b);
+int					stack_is_sorted(t_lst **head);
 t_lst				*new_lst(int value);
 
 #endif
