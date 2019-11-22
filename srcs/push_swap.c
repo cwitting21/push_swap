@@ -38,6 +38,13 @@ static int				ft_error()
 	return (0);
 }
 
+// static int				read_commands(t_lst **head_a, t_lst **head_b)
+// {
+// 	char				*line;
+
+// 	while (get_next_line(0, &line))
+// }
+
 int				main(int ac, char **av)
 {
 	t_lst		*head;
@@ -49,6 +56,7 @@ int				main(int ac, char **av)
 	{
 		if (!(args_to_lst(ac, av, &head)))
 			return (ft_error());
+		// read_commands(&stack.a, &stack.b);
 		stack.a = head;
 		printf("-----STACK A before\n");
 		test_print(&stack.a);
