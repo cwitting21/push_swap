@@ -19,9 +19,11 @@ static void		test_print_2(t_lst **head)
 	t_lst		*end;
 
 	end = *head;
-	printf("%d\n", end->value);
-	printf("%d\n", end->next->value);
-	printf("%d\n", end->next->next->value);
+	printf("pr.pr = %d\n", end->prev->prev->value);
+	printf("pr = %d\n", end->prev->value);
+	printf("val = %d\n", end->value);
+	printf("n = %d\n", end->next->value);
+	printf("n.n = %d\n", end->next->next->value);
 	
 }
 
@@ -47,7 +49,9 @@ int				main(int ac, char **av)
 		if (!(args_to_lst(ac, av, &head)))
 			return (ft_error());
 		stack.a = head;
+		printf("-----STACK A before pb\n");
 		test_print(&stack.a);
+		pb(&stack.a, &stack.b);
 		pb(&stack.a, &stack.b);
 		pb(&stack.a, &stack.b);
 		printf("-----STACK A-------\n");
