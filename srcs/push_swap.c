@@ -62,6 +62,8 @@ int				main(int ac, char **av)
 		test_print(&stack.a);
 		printf("-----STACK B-------\n");
 		test_print(&stack.b);
+		printf("!!!!!!!!!!!\n");
+		printf("sorted = %d\n", stack_is_sorted(&stack.a));
 		// swap(&stack.a);
 		// ss(&stack.a, &stack.b);
 		// rr(&stack.a, &stack.b);
