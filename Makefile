@@ -19,7 +19,7 @@ LIB_DIR = ./libft/
 SRC_DIR = ./srcs/
 INC_DIR = ./includes/
 
-SOURCE := new_lst.c args_to_lst.c pb.c pa.c swap.c ss.c
+SOURCE := new_lst.c args_to_lst.c pb.c pa.c swap.c ss.c rotate.c rr.c
 SRC := $(addprefix $(SRC_DIR), $(SOURCE))
 INCLUDES = push_swap.h
 INC = $(addprefix $(INC_DIR), $(INCLUDES))

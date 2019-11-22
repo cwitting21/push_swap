@@ -23,14 +23,12 @@ typedef struct		s_stack
 }					t_stack;
 
 int					args_to_lst(int ac, char **av, t_lst **head);
-t_lst				*new_lst(int value);
 int					pb(t_lst **head_a, t_lst **head_b);
 int					pa(t_lst **head_a, t_lst **head_b);
 int					swap(t_lst **head);
 int         		ss(t_lst **head_a, t_lst **head_b);
-
-
-
-
+int					rotate(t_lst **head);
+int					rr(t_lst **head_a, t_lst **head_b);
+t_lst				*new_lst(int value);
 
 #endif
