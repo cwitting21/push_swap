@@ -37,7 +37,7 @@ int			pa(t_lst **head_a, t_lst **head_b)
 	t_lst	*end_a = NULL;
 
 	end_a = (*head_a)->prev;
-	if ((*head_b)->size)
+	if ((*head_b)->size > 0)
 	{
 		stack_a_not_empty(head_a, head_b, end_a);
 		return (1);

@@ -16,6 +16,8 @@ void		stack_b_not_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
 	end_b->next = first;
 	first->prev = end_b;
 	first->size = (*head_b)->size++;
+	(*head_b) = first;
+	(*head_b)->size++;
 }
 
 void		stack_b_is_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
@@ -38,12 +40,12 @@ int			pb(t_lst **head_a, t_lst **head_b)
 	t_lst	*end_a = NULL;
 
 	end_a = (*head_a)->prev;
-	if (!*head_b && (*head_a)->size)
+	if (!*head_b && (*head_a)->size > 3)
 	{
 		stack_b_is_empty(head_a, head_b, end_a);
 		return (1);
 	}
-	if (*head_b && (*head_a)->size)
+	if (*head_b && (*head_a)->size > 3)
 	{
 		stack_b_not_empty(head_a, head_b, end_a);
 		return (1);

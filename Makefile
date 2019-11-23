@@ -20,7 +20,7 @@ SRC_DIR = ./srcs/
 INC_DIR = ./includes/
 
 SOURCE := 	new_lst.c args_to_lst.c pb.c pa.c swap.c ss.c rotate.c rr.c \
-			rev_rotate.c rrr.c stack_is_sorted.c
+			rev_rotate.c rrr.c stack_is_sorted.c get_next_line.c
 SRC := $(addprefix $(SRC_DIR), $(SOURCE))
 INCLUDES = push_swap.h
 INC = $(addprefix $(INC_DIR), $(INCLUDES))
