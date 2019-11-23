@@ -38,6 +38,14 @@ static int				ft_error()
 	return (0);
 }
 
+static void				print_stacks(t_lst **head_a, t_lst **head_b)
+{
+	printf("-----STACK A-------\n");
+	test_print(head_a);
+	printf("-----STACK B-------\n");
+	test_print(head_b);
+}
+
 static int				read_commands(t_lst **head_a, t_lst **head_b)
 {
 	char				*line;
@@ -48,92 +56,62 @@ static int				read_commands(t_lst **head_a, t_lst **head_b)
 		if (!ft_strcmp("sa", line))
 		{
 			swap(head_a);
-			printf("-----STACK A-------\n");
-			test_print(head_a);
-			printf("-----STACK B-------\n");
-			test_print(head_b);
+			print_stacks(head_a, head_b);
 		}
 		else if (!ft_strcmp("sb", line))
 		{
 			swap(head_b);
-			printf("-----STACK A-------\n");
-			test_print(head_a);
-			printf("-----STACK B-------\n");
-			test_print(head_b);
+			print_stacks(head_a, head_b);
 		}
 		else if (!ft_strcmp("ss", line))
 		{
 			ss(head_a, head_b);
-			printf("-----STACK A-------\n");
-			test_print(head_a);
-			printf("-----STACK B-------\n");
-			test_print(head_b);
+			print_stacks(head_a, head_b);
 		}
 		else if (!ft_strcmp("pa", line))
 		{
 			pa(head_a, head_b);
-			printf("-----STACK A-------\n");
-			test_print(head_a);
-			printf("-----STACK B-------\n");
-			test_print(head_b);
+			print_stacks(head_a, head_b);
 		}
 		else if (!ft_strcmp("pb", line))
 		{
 			pb(head_a, head_b);
-			printf("-----STACK A-------\n");
-			test_print(head_a);
-			printf("-----STACK B-------\n");
-			test_print(head_b);
+			print_stacks(head_a, head_b);
 		}
 		else if (!ft_strcmp("ra", line))
 		{
 			rotate(head_a);
-			printf("-----STACK A-------\n");
-			test_print(head_a);
-			printf("-----STACK B-------\n");
-			test_print(head_b);
+			print_stacks(head_a, head_b);
 		}
 		else if (!ft_strcmp("rb", line))
 		{
 			rotate(head_b);
-			printf("-----STACK A-------\n");
-			test_print(head_a);
-			printf("-----STACK B-------\n");
-			test_print(head_b);
+			print_stacks(head_a, head_b);
 		}
 		else if (!ft_strcmp("rr", line))
 		{
 			rr(head_a, head_b);
-			printf("-----STACK A-------\n");
-			test_print(head_a);
-			printf("-----STACK B-------\n");
-			test_print(head_b);
+			print_stacks(head_a, head_b);
 		}
 		else if (!ft_strcmp("rra", line))
 		{
 			rev_rotate(head_a);
-			printf("-----STACK A-------\n");
-			test_print(head_a);
-			printf("-----STACK B-------\n");
-			test_print(head_b);
+			print_stacks(head_a, head_b);
 		}
 		else if (!ft_strcmp("rrb", line))
 		{
 			rev_rotate(head_b);
-			printf("-----STACK A-------\n");
-			test_print(head_a);
-			printf("-----STACK B-------\n");
-			test_print(head_b);
+			print_stacks(head_a, head_b);
 		}
 		else if (!ft_strcmp("rrr", line))
 		{
 			rrr(head_a, head_b);
-			printf("-----STACK A-------\n");
-			test_print(head_a);
-			printf("-----STACK B-------\n");
-			test_print(head_b);
+			print_stacks(head_a, head_b);
 		}
+		else
+			return (ft_error());
 	}
+	ft_strdel(&line);
 	if (tmp == -1)
 		return (0);
 	if (get_next_line(0, &line) == 0)
@@ -141,7 +119,38 @@ static int				read_commands(t_lst **head_a, t_lst **head_b)
 	return (0);
 }
 
-int				main(int ac, char **av)
+static int			args_to_array(t_lst **head)
+{
+	t_lst			*end;
+	t_args			args;
+	size_t			tmp;
+	int				i = 0;
+
+	tmp = (*head)->size;
+	if (!(args.arr = malloc(sizeof(int) * tmp)))
+		return (0);
+	ft_bzero(args.arr, sizeof(args.arr));
+	args.max_i = 0;
+	args.mid_i = 0;
+	args.min_i = 0;
+	end = *head;
+	while (end->next && end->next != (*head))
+	{
+		args.arr[i++] = end->value;
+		end = end->next;
+	}
+	args.arr[i] = end->value;
+	++i;
+	printf("i = %d\n", i);
+	printf("i / 2 + 1 = %d\n", i / 2 + 1);
+	printf("i / 3 = %d\n", i / 3);
+	printf("i * 2 / 3 = %d\n", i * 2/ 3);
+	for (int m = 0; m < (*head)->size; m++)
+		printf("%d\n", args.arr[m]);
+	return (1);
+}
+
+int					main(int ac, char **av)
 {
 	t_lst		*head;
 	t_stack		stack;
@@ -152,20 +161,22 @@ int				main(int ac, char **av)
 	{
 		if (!(args_to_lst(ac, av, &head)))
 			return (ft_error());
-		stack.a = head;
-		read_commands(&stack.a, &stack.b);
-		if (stack_is_sorted(&stack.a))
-		{
-			printf("OK\n");
-			printf("-----STACK A-------\n");
-			test_print(&stack.a);
-		}
-		else
-		{
-			printf("KO\n");
-			printf("-----STACK A-------\n");
-			test_print(&stack.a);
-		}
+		args_to_array(&head);
+		// stack.a = head;
+		// read_commands(&stack.a, &stack.b);
+		// if (stack_is_sorted(&stack.a))
+		// {
+		// 	printf("OK\n");
+		// 	printf("-----STACK A-------\n");
+		// 	test_print(&stack.a);
+		// }
+		// else
+		// {
+		// 	printf("KO\n");
+		// 	printf("-----STACK A-------\n");
+		// 	test_print(&stack.a);
+		// }
+
 		// printf("-----STACK A before\n");
 		// test_print(&stack.a);
 		// while (stack.a->size > 3)

@@ -10,8 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
-
+CHECKER = checker
+PUSH_SWAP = push_swap
 CC = gcc -g
 FLAGS = -Wall -Wextra -Werror
 
@@ -21,6 +21,7 @@ INC_DIR = ./includes/
 
 SOURCE := 	new_lst.c args_to_lst.c pb.c pa.c swap.c ss.c rotate.c rr.c \
 			rev_rotate.c rrr.c stack_is_sorted.c get_next_line.c
+
 SRC := $(addprefix $(SRC_DIR), $(SOURCE))
 INCLUDES = push_swap.h
 INC = $(addprefix $(INC_DIR), $(INCLUDES))
@@ -31,22 +32,28 @@ RESET = \033[0m
 RED = \033[0;31m
 CYAN = \033[0;36m
 
-all: lib $(NAME)
+all: lib $(CHECKER)
 
-$(NAME): $(SRC) $(INC)
+$(CHECKER): $(SRC) $(INC)
 	@echo "$(GREEN)compiling...$(RESET)"
-	@$(CC) -o $(NAME) srcs/push_swap.c $(SRC) -L $(LIB_DIR) -lft
+	@$(CC) -o $(CHECKER) srcs/checker.c $(SRC) -L $(LIB_DIR) -lft
 	@echo "$(CYAN)DONE$(RESET)"
 
+# $(PUSH_SWAP): $(SRC) $(INC)
+# 	@echo "$(GREEN)compiling...$(RESET)"
+# 	@$(CC) -o $(NAME) srcs/push_swap.c $(SRC) -L $(LIB_DIR) -lft
+# 	@echo "$(CYAN)DONE$(RESET)"	
+
 lib:
-	@make -C $(LIB_DIR)
+	@make -C $(LIB_DIR) > /dev/null
 
 clean:
 	@make -C $(LIB_DIR) clean
 	@echo "$(RED)Object files removed$(RESET)"
+	@rm -rf *.dSYM
 
 fclean:	clean
-	@rm -f $(NAME)
+	@rm -f $(CHECKER)
 	@echo "$(RED)Fully clean$(RESET)"
 
 re:	fclean all
