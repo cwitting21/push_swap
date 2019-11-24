@@ -1,5 +1,3 @@
-#include "../includes/push_swap.h"
-
 static void		test_print(t_lst **head)
 {
 	t_lst		*end;
@@ -46,78 +44,78 @@ static void				print_stacks(t_lst **head_a, t_lst **head_b)
 	test_print(head_b);
 }
 
-static int				read_commands(t_lst **head_a, t_lst **head_b)
-{
-	char				*line;
-	int					tmp;
+// static int				read_commands(t_lst **head_a, t_lst **head_b)
+// {
+// 	char				*line;
+// 	int					tmp;
 
-	while ((tmp = get_next_line(0, &line)) == 1)
-	{
-		if (!ft_strcmp("sa", line))
-		{
-			swap(head_a);
-			print_stacks(head_a, head_b);
-		}
-		else if (!ft_strcmp("sb", line))
-		{
-			swap(head_b);
-			print_stacks(head_a, head_b);
-		}
-		else if (!ft_strcmp("ss", line))
-		{
-			ss(head_a, head_b);
-			print_stacks(head_a, head_b);
-		}
-		else if (!ft_strcmp("pa", line))
-		{
-			pa(head_a, head_b);
-			print_stacks(head_a, head_b);
-		}
-		else if (!ft_strcmp("pb", line))
-		{
-			pb(head_a, head_b);
-			print_stacks(head_a, head_b);
-		}
-		else if (!ft_strcmp("ra", line))
-		{
-			rotate(head_a);
-			print_stacks(head_a, head_b);
-		}
-		else if (!ft_strcmp("rb", line))
-		{
-			rotate(head_b);
-			print_stacks(head_a, head_b);
-		}
-		else if (!ft_strcmp("rr", line))
-		{
-			rr(head_a, head_b);
-			print_stacks(head_a, head_b);
-		}
-		else if (!ft_strcmp("rra", line))
-		{
-			rev_rotate(head_a);
-			print_stacks(head_a, head_b);
-		}
-		else if (!ft_strcmp("rrb", line))
-		{
-			rev_rotate(head_b);
-			print_stacks(head_a, head_b);
-		}
-		else if (!ft_strcmp("rrr", line))
-		{
-			rrr(head_a, head_b);
-			print_stacks(head_a, head_b);
-		}
-		else
-			return (ft_error());
-	}
-	ft_strdel(&line);
-	if (tmp == -1)
-		return (0);
-	if (get_next_line(0, &line) == 0)
-		return (1);
-	return (0);
-}
+// 	while ((tmp = get_next_line(0, &line)) == 1)
+// 	{
+// 		if (!ft_strcmp("sa", line))
+// 		{
+// 			swap(head_a);
+// 			print_stacks(head_a, head_b);
+// 		}
+// 		else if (!ft_strcmp("sb", line))
+// 		{
+// 			swap(head_b);
+// 			print_stacks(head_a, head_b);
+// 		}
+// 		else if (!ft_strcmp("ss", line))
+// 		{
+// 			ss(head_a, head_b);
+// 			print_stacks(head_a, head_b);
+// 		}
+// 		else if (!ft_strcmp("pa", line))
+// 		{
+// 			pa(head_a, head_b);
+// 			print_stacks(head_a, head_b);
+// 		}
+// 		else if (!ft_strcmp("pb", line))
+// 		{
+// 			pb(head_a, head_b);
+// 			print_stacks(head_a, head_b);
+// 		}
+// 		else if (!ft_strcmp("ra", line))
+// 		{
+// 			rotate(head_a);
+// 			print_stacks(head_a, head_b);
+// 		}
+// 		else if (!ft_strcmp("rb", line))
+// 		{
+// 			rotate(head_b);
+// 			print_stacks(head_a, head_b);
+// 		}
+// 		else if (!ft_strcmp("rr", line))
+// 		{
+// 			rr(head_a, head_b);
+// 			print_stacks(head_a, head_b);
+// 		}
+// 		else if (!ft_strcmp("rra", line))
+// 		{
+// 			rev_rotate(head_a);
+// 			print_stacks(head_a, head_b);
+// 		}
+// 		else if (!ft_strcmp("rrb", line))
+// 		{
+// 			rev_rotate(head_b);
+// 			print_stacks(head_a, head_b);
+// 		}
+// 		else if (!ft_strcmp("rrr", line))
+// 		{
+// 			rrr(head_a, head_b);
+// 			print_stacks(head_a, head_b);
+// 		}
+// 		else
+// 			return (ft_error());
+// 	}
+// 	ft_strdel(&line);
+// 	if (tmp == -1)
+// 		return (0);
+// 	if (get_next_line(0, &line) == 0)
+// 		return (1);
+// 	return (0);
+// }
 
 // static void			q_sort_arr_args(t_args *args, size_t size)
 // {
@@ -166,6 +164,20 @@ static void			swap_sort(int *a, int *b)
 	*b = tmp;
 }
 
+static t_bool		arr_has_no_repetetive_vals(t_args *args)
+{
+	int 			i;
+
+	i = 1;
+	while (args->arr[i])
+	{
+		if (args->arr[i - 1] == args->arr[i])
+			return (false);
+		++i;
+	}
+	return (true);
+}
+
 static void			bubble_sort_arr_args(t_args *args, size_t size)
 {
 	int				i;
@@ -190,20 +202,8 @@ static void			bubble_sort_arr_args(t_args *args, size_t size)
 	args->mid_s = args->arr[i / 3];
 	args->mid_e = args->arr[i * 2 / 3];
 	args->max_i = args->arr[size - 1];
-}
-
-static t_bool		arr_has_no_repetetive_vals(t_args *args)
-{
-	int 			i;
-
-	i = 1;
-	while (args->arr[i])
-	{
-		if (args->arr[i - 1] == args->arr[i])
-			return (false);
-		++i;
-	}
-	return (true);
+	if (!(arr_has_no_repetetive_vals(&args)))
+		printf("ERROR\n");
 }
 
 static int			args_to_array(t_lst **head)
@@ -229,16 +229,14 @@ static int			args_to_array(t_lst **head)
 	}
 	args.arr[i] = end->value;
 	++i;
-	printf("ARR BEFORE\n");
-	for (int m = 0; m < (*head)->size; m++)
-		printf("%d\n", args.arr[m]);
+	// printf("ARR BEFORE\n");
+	// for (int m = 0; m < (*head)->size; m++)
+	// 	printf("%d\n", args.arr[m]);
 	// q_sort_arr_args(&args, (*head)->size);
 	bubble_sort_arr_args(&args, (*head)->size);
-	printf("ARR AFTER SORT\n");
-	for (int m = 0; m < (*head)->size; m++)
-		printf("%d\n", args.arr[m]);
-	if (!(arr_has_no_repetetive_vals(&args)))
-	printf("ERROR\n");
+	// printf("ARR AFTER SORT\n");
+	// for (int m = 0; m < (*head)->size; m++)
+	// 	printf("%d\n", args.arr[m]);
 	return (1);
 }
 

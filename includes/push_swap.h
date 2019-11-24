@@ -20,7 +20,8 @@ typedef struct		s_args
 {
 	int				*arr;
 	size_t			max_i;
-	size_t			mid_i;
+	size_t			mid_s;
+	size_t			mid_e;
 	size_t			min_i;
 }					t_args;
 
@@ -29,6 +30,12 @@ typedef struct		s_stack
 	t_lst			*a;
 	t_lst			*b;
 }					t_stack;
+
+typedef enum		e_bool
+{
+					true = 1,
+					false = !true
+}					t_bool;
 
 int					args_to_lst(int ac, char **av, t_lst **head);
 int					pb(t_lst **head_a, t_lst **head_b);
