@@ -144,18 +144,18 @@ static int				read_commands(t_lst **head_a, t_lst **head_b)
 
 // }
 
-// t_bool				array_is_sorted(int *arr)
-// {
-// 	int				i = 1;
+t_bool				array_is_sorted(int *arr)
+{
+	int				i = 1;
 
-// 	while (arr[i])
-// 	{
-// 		if (arr[i] < arr[i - 1])
-// 			return (false);
-// 		++i;
-// 	}
-// 	return (true);
-// }
+	while (arr[i])
+	{
+		if (arr[i] < arr[i - 1])
+			return (false);
+		++i;
+	}
+	return (true);
+}
 
 static void			swap_sort(int *a, int *b)
 {
@@ -238,7 +238,9 @@ static int			args_to_array(t_lst **head)
 	for (int m = 0; m < (*head)->size; m++)
 		printf("%d\n", args.arr[m]);
 	if (!(arr_has_no_repetetive_vals(&args)))
-	printf("ERROR\n");
+		printf("ERROR REP VAL\n");
+	if (!(array_is_sorted(args.arr)))
+		printf("ERROR ARR NOT SORTED\n");
 	return (1);
 }
 

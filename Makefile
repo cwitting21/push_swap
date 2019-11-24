@@ -32,17 +32,17 @@ RESET = \033[0m
 RED = \033[0;31m
 CYAN = \033[0;36m
 
-all: lib $(CHECKER)
+all: lib $(CHECKER) $(PUSH_SWAP)
 
 $(CHECKER): $(SRC) $(INC)
 	@echo "$(GREEN)compiling...$(RESET)"
 	@$(CC) -o $(CHECKER) srcs/checker.c $(SRC) -L $(LIB_DIR) -lft
 	@echo "$(CYAN)DONE$(RESET)"
 
-# $(PUSH_SWAP): $(SRC) $(INC)
-# 	@echo "$(GREEN)compiling...$(RESET)"
-# 	@$(CC) -o $(NAME) srcs/push_swap.c $(SRC) -L $(LIB_DIR) -lft
-# 	@echo "$(CYAN)DONE$(RESET)"	
+$(PUSH_SWAP): $(SRC) $(INC)
+	@echo "$(GREEN)compiling...$(RESET)"
+	@$(CC) -o $(PUSH_SWAP) srcs/push_swap.c $(SRC) -L $(LIB_DIR) -lft
+	@echo "$(CYAN)DONE$(RESET)"
 
 lib:
 	@make -C $(LIB_DIR) > /dev/null
@@ -54,6 +54,7 @@ clean:
 
 fclean:	clean
 	@rm -f $(CHECKER)
+	@rm -f $(PUSH_SWAP)
 	@echo "$(RED)Fully clean$(RESET)"
 
 re:	fclean all

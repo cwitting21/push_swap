@@ -22,6 +22,7 @@ typedef struct		s_args
 	size_t			max_i;
 	size_t			mid_s;
 	size_t			mid_e;
+	size_t			mid_i;
 	size_t			min_i;
 }					t_args;
 
