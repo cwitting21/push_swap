@@ -113,7 +113,7 @@ static void			bubble_sort_arr_args(t_args *args, size_t size)
 		printf("Error\n");
 }
 
-static t_lst		*sort_lists(t_args *args, t_lst **head_a, t_lst **head_b)
+static t_lst		*from_a_to_b(t_args *args, t_lst **head_a, t_lst **head_b)
 {
 	t_lst			*end_a;
 	t_lst			*end_b;
@@ -133,11 +133,13 @@ static t_lst		*sort_lists(t_args *args, t_lst **head_a, t_lst **head_b)
 		if (end_a->value > args->min_i && end_a->value <= args->mid_s)
 		{
 			pb(&end_a, head_b);
+			printf("pb\n");
 			// print_stacks(&end_a, head_b);
 			// printf("STACK A!!!\n");
 			// test_print(head_a);
 			// test_print_2(head_a);
 			rev_rotate(head_b); // rrb
+			printf("rrb\n");
 			// print_stacks(&end_a, head_b);
 			code = 0;
 		}
@@ -145,18 +147,21 @@ static t_lst		*sort_lists(t_args *args, t_lst **head_a, t_lst **head_b)
 		&& end_a->value != args->mid_i)
 		{
 			pb(&end_a, head_b);
+			printf("pb\n");
 			// print_stacks(&end_a, head_b);
 			code = 0;
 		}
 		else if (end_a->value > args->mid_e && end_a->value <= args->max_i)
 		{
 			rotate(&end_a);
+			printf("ra\n");
 			// print_stacks(&end_a, head_b);
 			code = 0;
 		}
 		else if (end_a->value == args->min_i || end_a->value == args->mid_i)
 		{
 			rotate(&end_a);
+			printf("ra\n");
 			code = 0;
 		}
 		if (code)
@@ -193,6 +198,33 @@ static int			args_to_array(t_lst **head, t_args *args)
 	return (1);
 }
 
+static void			sort_lists(t_lst **head_a, t_lst **head_b)
+{
+	t_lst			*end_a;
+	t_lst			*tmp = NULL;
+	t_lst			*tmp2 = NULL;
+	size_t			i;
+	size_t			n;
+
+	i = 0;
+	n = 0;
+	end_a = (*head_a)->prev;
+	tmp = tmp2 = (*head_a);
+	if ((*head_b)->value > end_a->value && (*head_b)->value < (*head_a)->value)
+		pa(head_a, head_b);
+	
+	while ((*head_b)->value < tmp->value)
+	{
+		rev_rotate(&tmp);
+		++i;
+	}
+	while ((*head_b)->value < tmp2->value)
+	{
+		rotate(&tmp2);
+		++n;
+	}
+}
+
 int					main(int ac, char **av)
 {
 	t_lst		*head;
@@ -216,7 +248,8 @@ int					main(int ac, char **av)
 		args.mid_e = 0;
 		args.min_i = 0;
 		args_to_array(&head, &args);
-		start_a = sort_lists(&args, &stack.a, &stack.b);
+		start_a = from_a_to_b(&args, &stack.a, &stack.b);
+		sort_lists(&start_a, &stack.b);
 		printf("STACKS\n");
 		print_stacks(&start_a, &stack.b);
 		// printf("-----STACK A before\n");
