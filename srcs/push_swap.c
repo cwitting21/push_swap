@@ -45,103 +45,7 @@ static void				print_stacks(t_lst **head_a, t_lst **head_b)
 	printf("-----STACK B-------\n");
 	test_print(head_b);
 }
-
-// static int				read_commands(t_lst **head_a, t_lst **head_b)
-// {
-// 	char				*line;
-// 	int					tmp;
-
-// 	while ((tmp = get_next_line(0, &line)) == 1)
-// 	{
-// 		if (!ft_strcmp("sa", line))
-// 		{
-// 			swap(head_a);
-// 			print_stacks(head_a, head_b);
-// 		}
-// 		else if (!ft_strcmp("sb", line))
-// 		{
-// 			swap(head_b);
-// 			print_stacks(head_a, head_b);
-// 		}
-// 		else if (!ft_strcmp("ss", line))
-// 		{
-// 			ss(head_a, head_b);
-// 			print_stacks(head_a, head_b);
-// 		}
-// 		else if (!ft_strcmp("pa", line))
-// 		{
-// 			pa(head_a, head_b);
-// 			print_stacks(head_a, head_b);
-// 		}
-// 		else if (!ft_strcmp("pb", line))
-// 		{
-// 			pb(head_a, head_b);
-// 			print_stacks(head_a, head_b);
-// 		}
-// 		else if (!ft_strcmp("ra", line))
-// 		{
-// 			rotate(head_a);
-// 			print_stacks(head_a, head_b);
-// 		}
-// 		else if (!ft_strcmp("rb", line))
-// 		{
-// 			rotate(head_b);
-// 			print_stacks(head_a, head_b);
-// 		}
-// 		else if (!ft_strcmp("rr", line))
-// 		{
-// 			rr(head_a, head_b);
-// 			print_stacks(head_a, head_b);
-// 		}
-// 		else if (!ft_strcmp("rra", line))
-// 		{
-// 			rev_rotate(head_a);
-// 			print_stacks(head_a, head_b);
-// 		}
-// 		else if (!ft_strcmp("rrb", line))
-// 		{
-// 			rev_rotate(head_b);
-// 			print_stacks(head_a, head_b);
-// 		}
-// 		else if (!ft_strcmp("rrr", line))
-// 		{
-// 			rrr(head_a, head_b);
-// 			print_stacks(head_a, head_b);
-// 		}
-// 		else
-// 			return (ft_error());
-// 	}
-// 	ft_strdel(&line);
-// 	if (tmp == -1)
-// 		return (0);
-// 	if (get_next_line(0, &line) == 0)
-// 		return (1);
-// 	return (0);
-// }
-
-// static void			q_sort_arr_args(t_args *args, size_t size)
-// {
-// 	size_t			pivot;
-// 	size_t			*left_ptr;
-// 	size_t			*right_ptr;
-
-// 	pivot = args->arr[size - 1];
-// 	left_ptr = args->arr[0];
-// 	right_ptr = args->arr[size - 2];
-// 	while (*left_ptr < pivot)
-// 		left_ptr++;
-// 	while (*right_ptr >= pivot)
-// 	{
-// 		if (left_ptr = right_ptr)
-// 			break;
-// 		right_ptr++;
-// 	}
-// 	if (left_ptr = right_ptr)
-// 		swap(*left_ptr (or *right_ptr), pivot) // *left_ptr (or right is sorted
-// 	else
-// 		swap(*left_ptr, *right_ptr);
 	
-
 // }
 
 // t_bool				array_is_sorted(int *arr)
@@ -206,48 +110,58 @@ static void			bubble_sort_arr_args(t_args *args, size_t size)
 	args->mid_i = args->mid_s + ((args->mid_e - args->mid_s) / 2);
 	args->max_i = args->arr[size - 1];
 	if (!(arr_has_no_repetetive_vals(args)))
-		printf("ERROR\n");
+		printf("Error\n");
 }
 
 static void			sort_lists(t_args *args, t_lst **head_a, t_lst **head_b)
 {
 	t_lst			*end_a;
 	t_lst			*end_b;
+	t_lst			*start_a = NULL;
+	int				code;
 
-	end_a = (*head_a)->prev;
-	end_b = (*head_b)->prev;
-	while ((*head_a)->size > 3 && end_a->next && end_a->next != (*head_a))
+	end_a = (*head_a);
+	if (*head_b)
+		end_b = (*head_b)->prev;
+	code = 1;
+	while (end_a->next != (*head_a))
 	{
 		if (end_a->value > args->min_i && end_a->value <= args->mid_s)
 		{
-			pb(head_a, head_b);
+			pb(&end_a, head_b);
+			(*head_a) = end_a;
+			print_stacks(&end_a, head_b);
+			printf("!!!!!!!!!!!!!!!!!!!!!\n");
+			print_stacks(head_a, head_b);
+			// printf("STACK A!!!\n");
+			// test_print(head_a);
+			// test_print_2(head_a);
 			rev_rotate(head_b); // rrb
+			code = 0;
 		}
 		else if (end_a->value > args->mid_s && end_a->value <= args->mid_e
 		&& end_a->value != args->mid_i)
-			pb(head_a, head_b);
+			pb(&end_a, head_b);
 		else if (end_a->value > args->mid_e && end_a->value < args->max_i)
-			rotate(head_a);
-
-		end_a = end_a->next;
+		{
+			rotate(&end_a);
+			code = 1;
+		}
+		if (code)
+		{
+			end_a->next->size = end_a->size - 1;
+			end_a = end_a->next;
+		}
 	}
 }
 
 static int			args_to_array(t_lst **head, t_args *args)
 {
 	t_lst			*end;
-	// t_args			args;
 	size_t			tmp;
 	int				i = 0;
 
 	tmp = (*head)->size;
-	// if (!(args.arr = malloc(sizeof(int) * tmp)))
-	// 	return (0);
-	// ft_bzero(args.arr, sizeof(args.arr));
-	// args.max_i = 0;
-	// args.mid_s = 0;
-	// args.mid_e = 0;
-	// args.min_i = 0;
 	end = *head;
 	while (end->next && end->next != (*head))
 	{
@@ -259,12 +173,10 @@ static int			args_to_array(t_lst **head, t_args *args)
 	// printf("ARR BEFORE\n");
 	// for (int m = 0; m < (*head)->size; m++)
 	// 	printf("%d\n", args.arr[m]);
-	// q_sort_arr_args(&args, (*head)->size);
 	bubble_sort_arr_args(args, (*head)->size);
-	// sort_lists(&args, head);
-	printf("ARR AFTER SORT\n");
-	for (int m = 0; m < (*head)->size; m++)
-		printf("%d\n", args->arr[m]);
+	// printf("ARR AFTER SORT\n");
+	// for (int m = 0; m < (*head)->size; m++)
+	// 	printf("%d\n", args->arr[m]);
 	return (1);
 }
 
@@ -282,7 +194,7 @@ int					main(int ac, char **av)
 			return (ft_error());
 		stack.a = head;
 		if (!(args.arr = malloc(sizeof(int) * head->size)))
-		return (0);
+			return (0);
 		ft_bzero(args.arr, sizeof(args.arr));
 		args.max_i = 0;
 		args.mid_s = 0;
@@ -290,6 +202,8 @@ int					main(int ac, char **av)
 		args.min_i = 0;
 		args_to_array(&head, &args);
 		sort_lists(&args, &stack.a, &stack.b);
+		printf("STACKS\n");
+		print_stacks(&stack.a, &stack.b);
 		// printf("-----STACK A before\n");
 		// test_print(&stack.a);
 		// pb(&stack.a, &stack.b);

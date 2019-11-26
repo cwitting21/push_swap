@@ -13,7 +13,6 @@ typedef struct		s_lst
 	struct s_lst	*prev;
 	struct s_lst	*next;
 	size_t			size;
-	int				code; // 0 - min val, 01 - min group, 1 - mid val, 2 - max val
 }					t_lst;
 
 typedef struct		s_args

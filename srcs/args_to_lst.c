@@ -60,8 +60,6 @@ int			args_to_lst(int ac, char **av, t_lst **head)
 {
 	int		i;
 	char	*ptr;
-	// t_lst	*new = NULL;
-	// t_lst	*head = NULL;
 
 	i = 0;
 	if (valid_args(ptr, ac, av))
