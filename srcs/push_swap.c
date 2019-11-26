@@ -127,31 +127,36 @@ static t_lst		*sort_lists(t_args *args, t_lst **head_a, t_lst **head_b)
 	while (tmp--)
 	{
 		code = 1;
-		printf("\n\n");
-		printf("VAL = %d\n", end_a->value);
-		printf("\n\n");
+		// printf("\n\n");
+		// printf("VAL = %d\n", end_a->value);
+		// printf("\n\n");
 		if (end_a->value > args->min_i && end_a->value <= args->mid_s)
 		{
 			pb(&end_a, head_b);
-			print_stacks(&end_a, head_b);
+			// print_stacks(&end_a, head_b);
 			// printf("STACK A!!!\n");
 			// test_print(head_a);
 			// test_print_2(head_a);
 			rev_rotate(head_b); // rrb
-			print_stacks(&end_a, head_b);
+			// print_stacks(&end_a, head_b);
 			code = 0;
 		}
 		else if (end_a->value > args->mid_s && end_a->value <= args->mid_e
 		&& end_a->value != args->mid_i)
 		{
 			pb(&end_a, head_b);
-			print_stacks(&end_a, head_b);
+			// print_stacks(&end_a, head_b);
 			code = 0;
 		}
 		else if (end_a->value > args->mid_e && end_a->value <= args->max_i)
 		{
 			rotate(&end_a);
-			print_stacks(&end_a, head_b);
+			// print_stacks(&end_a, head_b);
+			code = 0;
+		}
+		else if (end_a->value == args->min_i || end_a->value == args->mid_i)
+		{
+			rotate(&end_a);
 			code = 0;
 		}
 		if (code)
