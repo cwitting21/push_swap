@@ -119,33 +119,40 @@ static void			sort_lists(t_args *args, t_lst **head_a, t_lst **head_b)
 	t_lst			*end_b;
 	t_lst			*start_a = NULL;
 	int				code;
+	int				tmp = (*head_a)->size + 1;
 
 	end_a = (*head_a);
 	if (*head_b)
 		end_b = (*head_b)->prev;
-	code = 1;
-	while (end_a->next != (*head_a))
+	while (tmp--)
 	{
+		code = 1;
+		printf("\n\n");
+		printf("VAL = %d\n", end_a->value);
+		printf("\n\n");
 		if (end_a->value > args->min_i && end_a->value <= args->mid_s)
 		{
 			pb(&end_a, head_b);
-			(*head_a) = end_a;
 			print_stacks(&end_a, head_b);
-			printf("!!!!!!!!!!!!!!!!!!!!!\n");
-			print_stacks(head_a, head_b);
 			// printf("STACK A!!!\n");
 			// test_print(head_a);
 			// test_print_2(head_a);
 			rev_rotate(head_b); // rrb
+			print_stacks(&end_a, head_b);
 			code = 0;
 		}
 		else if (end_a->value > args->mid_s && end_a->value <= args->mid_e
 		&& end_a->value != args->mid_i)
+		{
 			pb(&end_a, head_b);
-		else if (end_a->value > args->mid_e && end_a->value < args->max_i)
+			print_stacks(&end_a, head_b);
+			code = 0;
+		}
+		else if (end_a->value > args->mid_e && end_a->value <= args->max_i)
 		{
 			rotate(&end_a);
-			code = 1;
+			print_stacks(&end_a, head_b);
+			code = 0;
 		}
 		if (code)
 		{
