@@ -113,13 +113,13 @@ static void			bubble_sort_arr_args(t_args *args, size_t size)
 		printf("Error\n");
 }
 
-static void			sort_lists(t_args *args, t_lst **head_a, t_lst **head_b)
+static t_lst		*sort_lists(t_args *args, t_lst **head_a, t_lst **head_b)
 {
 	t_lst			*end_a;
 	t_lst			*end_b;
 	t_lst			*start_a = NULL;
 	int				code;
-	int				tmp = (*head_a)->size + 1;
+	int				tmp = (*head_a)->size;
 
 	end_a = (*head_a);
 	if (*head_b)
@@ -160,6 +160,7 @@ static void			sort_lists(t_args *args, t_lst **head_a, t_lst **head_b)
 			end_a = end_a->next;
 		}
 	}
+	return (end_a);
 }
 
 static int			args_to_array(t_lst **head, t_args *args)
@@ -192,9 +193,11 @@ int					main(int ac, char **av)
 	t_lst		*head;
 	t_stack		stack;
 	t_args		args;
+	t_lst		*start_a;
 
 	stack.a = NULL;
 	stack.b = NULL;
+	start_a = NULL;
 	if (ac > 1)
 	{
 		if (!(args_to_lst(ac, av, &head)))
@@ -208,9 +211,9 @@ int					main(int ac, char **av)
 		args.mid_e = 0;
 		args.min_i = 0;
 		args_to_array(&head, &args);
-		sort_lists(&args, &stack.a, &stack.b);
+		start_a = sort_lists(&args, &stack.a, &stack.b);
 		printf("STACKS\n");
-		print_stacks(&stack.a, &stack.b);
+		print_stacks(&start_a, &stack.b);
 		// printf("-----STACK A before\n");
 		// test_print(&stack.a);
 		// pb(&stack.a, &stack.b);
