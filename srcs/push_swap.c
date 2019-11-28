@@ -84,7 +84,7 @@ static t_bool		arr_has_no_repetetive_vals(t_args *args)
 	return (true);
 }
 
-static void			bubble_sort_arr_args(t_args *args, size_t size)
+static int			bubble_sort_arr_args(t_args *args, size_t size)
 {
 	int				i;
 	int				sort;
@@ -110,7 +110,8 @@ static void			bubble_sort_arr_args(t_args *args, size_t size)
 	args->mid_i = args->mid_s + ((args->mid_e - args->mid_s) / 2);
 	args->max_i = args->arr[size - 1];
 	if (!(arr_has_no_repetetive_vals(args)))
-		printf("Error\n");
+		return (0);
+	return (1);
 }
 
 static t_lst		*from_a_to_b(t_args *args, t_lst **head_a, t_lst **head_b)
@@ -124,23 +125,15 @@ static t_lst		*from_a_to_b(t_args *args, t_lst **head_a, t_lst **head_b)
 	end_a = (*head_a);
 	if (*head_b)
 		end_b = (*head_b)->prev;
-	while (tmp--)
+	while (tmp-- || tmp > 3)
 	{
 		code = 1;
-		// printf("\n\n");
-		// printf("VAL = %d\n", end_a->value);
-		// printf("\n\n");
 		if (end_a->value > args->min_i && end_a->value <= args->mid_s)
 		{
 			pb(&end_a, head_b);
 			printf("pb\n");
-			// print_stacks(&end_a, head_b);
-			// printf("STACK A!!!\n");
-			// test_print(head_a);
-			// test_print_2(head_a);
 			rev_rotate(head_b); // rrb
 			printf("rrb\n");
-			// print_stacks(&end_a, head_b);
 			code = 0;
 		}
 		else if (end_a->value > args->mid_s && end_a->value <= args->mid_e
@@ -148,14 +141,12 @@ static t_lst		*from_a_to_b(t_args *args, t_lst **head_a, t_lst **head_b)
 		{
 			pb(&end_a, head_b);
 			printf("pb\n");
-			// print_stacks(&end_a, head_b);
 			code = 0;
 		}
 		else if (end_a->value > args->mid_e && end_a->value <= args->max_i)
 		{
 			rotate(&end_a);
 			printf("ra\n");
-			// print_stacks(&end_a, head_b);
 			code = 0;
 		}
 		else if (end_a->value == args->min_i || end_a->value == args->mid_i)
@@ -188,44 +179,72 @@ static int			args_to_array(t_lst **head, t_args *args)
 	}
 	args->arr[i] = end->value;
 	++i;
-	// printf("ARR BEFORE\n");
-	// for (int m = 0; m < (*head)->size; m++)
-	// 	printf("%d\n", args.arr[m]);
-	bubble_sort_arr_args(args, (*head)->size);
-	// printf("ARR AFTER SORT\n");
-	// for (int m = 0; m < (*head)->size; m++)
-	// 	printf("%d\n", args->arr[m]);
+	return (bubble_sort_arr_args(args, (*head)->size));
+}
+
+// static void			sort_lists(t_lst **head_a, t_lst **head_b)
+// {
+// 	t_lst			*end_a;
+// 	t_lst			*tmp = NULL;
+// 	t_lst			*tmp2 = NULL;
+// 	size_t			i;
+// 	size_t			n;
+
+// 	i = 0;
+// 	n = 0;
+// 	end_a = (*head_a)->prev;
+// 	tmp = tmp2 = (*head_a);
+// 	if ((*head_b)->value > end_a->value && (*head_b)->value < (*head_a)->value)
+// 		pa(head_a, head_b);
+	
+// 	while ((*head_b)->value < tmp->value)
+// 	{
+// 		rev_rotate(&tmp);
+// 		++i;
+// 	}
+// 	while ((*head_b)->value < tmp2->value)
+// 	{
+// 		rotate(&tmp2);
+// 		++n;
+// 	}
+// }
+
+static int		initialise_args(t_args *args, size_t size)
+{
+	if (!(args->arr = malloc(sizeof(int) * size)))
+			return (0);
+	ft_bzero(args->arr, sizeof(args->arr));
+	args->max_i = 0;
+	args->mid_s = 0;
+	args->mid_e = 0;
+	args->min_i = 0;
 	return (1);
 }
 
-static void			sort_lists(t_lst **head_a, t_lst **head_b)
+static void		sort_3_numbers(t_lst **h)
 {
-	t_lst			*end_a;
-	t_lst			*tmp = NULL;
-	t_lst			*tmp2 = NULL;
-	size_t			i;
-	size_t			n;
-
-	i = 0;
-	n = 0;
-	end_a = (*head_a)->prev;
-	tmp = tmp2 = (*head_a);
-	if ((*head_b)->value > end_a->value && (*head_b)->value < (*head_a)->value)
-		pa(head_a, head_b);
-	
-	while ((*head_b)->value < tmp->value)
+	if ((*h)->value < (*h)->prev->value && (*h)->prev->value < (*h)->next->value)
 	{
-		rev_rotate(&tmp);
-		++i;
+		rev_rotate(h);
+		swap(h);
 	}
-	while ((*head_b)->value < tmp2->value)
+	else if ((*h)->value > (*h)->prev->value && (*h)->prev->value > (*h)->next->value)
 	{
-		rotate(&tmp2);
-		++n;
+		rev_rotate(h);
+		rev_rotate(h);
+	}
+	else if ((*h)->value > (*h)->next->value && (*h)->prev->value > (*h)->value)
+		swap(h);
+	else if ((*h)->value > (*h)->prev->value && (*h)->value < (*h)->next->value)
+		rev_rotate(h);
+	else if ((*h)->next->value < (*h)->value && (*h)->next->value > (*h)->prev->value)
+	{
+		swap(h);
+		rev_rotate(h);
 	}
 }
 
-int					main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_lst		*head;
 	t_stack		stack;
@@ -237,45 +256,23 @@ int					main(int ac, char **av)
 	start_a = NULL;
 	if (ac > 1)
 	{
-		if (!(args_to_lst(ac, av, &head)))
+		if (!(args_to_lst(ac, av, &head)) || !(initialise_args(&args, head->size)) ||
+		!(args_to_array(&head, &args)))
 			return (ft_error());
 		stack.a = head;
-		if (!(args.arr = malloc(sizeof(int) * head->size)))
-			return (0);
-		ft_bzero(args.arr, sizeof(args.arr));
-		args.max_i = 0;
-		args.mid_s = 0;
-		args.mid_e = 0;
-		args.min_i = 0;
-		args_to_array(&head, &args);
-		start_a = from_a_to_b(&args, &stack.a, &stack.b);
-		sort_lists(&start_a, &stack.b);
-		printf("STACKS\n");
-		print_stacks(&start_a, &stack.b);
-		// printf("-----STACK A before\n");
-		// test_print(&stack.a);
-		// pb(&stack.a, &stack.b);
-		// pb(&stack.a, &stack.b);
-		// pb(&stack.a, &stack.b);
-		// pb(&stack.a, &stack.b);
-		// printf("-----STACK B-------\n");
-		// test_print(&stack.b);
-		// printf("!!!!!!!!!!!\n");
-		// printf("sorted = %d\n", stack_is_sorted(&stack.a));
-		// swap(&stack.a);
-		// ss(&stack.a, &stack.b);
-		// rr(&stack.a, &stack.b);
-		// pa(&stack.a, &stack.b);
-		// rotate(&stack.a);
-		// rrr(&stack.a, &stack.b);
-		// printf("-----STACK A-------\n");
-		// test_print(&stack.a);
-		// printf("-----STACK B-------\n");
-		// test_print(&stack.b);
-		// printf("-----TEST A-------\n");
-		// test_print_2(&stack.a);
-		// printf("-----TEST B-------\n");
-		// test_print_2(&stack.b);
+		printf("size = %d\n", head->size);
+		if (head->size > 5)
+		{
+			start_a = from_a_to_b(&args, &stack.a, &stack.b);
+			// sort_lists(&start_a, &stack.b);
+			printf("STACKS\n");
+			print_stacks(&start_a, &stack.b);
+		}
+		else if (head->size == 3)
+		{
+			sort_3_numbers(&stack.a);
+			print_stacks(&stack.a, &stack.b);
+		}
 	}
 	return (0);
 }
