@@ -352,6 +352,15 @@ static void		sort_lists(t_lst **head_a, t_lst **head_b)
 	}
 }
 
+static void		final_sort(t_lst **head, t_args args)
+{
+	while ((*head)->value != args.min_i)
+	{
+		rotate(head);
+		printf("ra\n");
+	}
+}
+
 int				main(int ac, char **av)
 {
 	t_lst		*head;
@@ -374,6 +383,7 @@ int				main(int ac, char **av)
 			leave_3_nbrs_in_a(&start_a, &stack.b, &args);
 			sort_3_numbers(&start_a);
 			sort_lists(&start_a, &stack.b);
+			final_sort(&start_a, args);
 		}
 		else if (head->size == 3)
 		{
@@ -385,7 +395,7 @@ int				main(int ac, char **av)
 			// sort_5_numbers(&stack.a, &stack.b);
 		// }
 		// printf("---------------------\n");
-		// print_stacks(&start_a, &stack.b);
+		print_stacks(&start_a, &stack.b);
 	}
 	return (0);
 }
