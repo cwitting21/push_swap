@@ -226,21 +226,129 @@ static void		sort_3_numbers(t_lst **h)
 	if ((*h)->value < (*h)->prev->value && (*h)->prev->value < (*h)->next->value)
 	{
 		rev_rotate(h);
+		printf("rra\n");
 		swap(h);
+		printf("sa\n");
 	}
 	else if ((*h)->value > (*h)->prev->value && (*h)->prev->value > (*h)->next->value)
 	{
 		rev_rotate(h);
+		printf("rra\n");
 		rev_rotate(h);
+		printf("rra\n");
 	}
 	else if ((*h)->value > (*h)->next->value && (*h)->prev->value > (*h)->value)
+	{
 		swap(h);
+		printf("sa\n");
+	}
 	else if ((*h)->value > (*h)->prev->value && (*h)->value < (*h)->next->value)
+	{
 		rev_rotate(h);
+		printf("rra\n");
+	}
 	else if ((*h)->next->value < (*h)->value && (*h)->next->value > (*h)->prev->value)
 	{
 		swap(h);
+		printf("sa\n");
 		rev_rotate(h);
+		printf("rra\n");
+	}
+}
+
+// static void		sort_5_numbers(t_lst **head_a, t_lst **head_b)
+// {
+// 	while ((*head_a)->size > 3)
+// 		pb(head_a, head_b);
+// 	sort_3_numbers(head_a);
+// 	printf("!!!!!!!!!!!!!!!!!!!!\n");
+// 	print_stacks(head_a, head_b);
+// }
+
+static void		leave_3_nbrs_in_a(t_lst **head_a, t_lst **head_b, t_args *args)
+{
+	t_lst		*tmp;
+	int			code;
+	int			i;
+
+	i = (*head_a)->size;
+	tmp = (*head_a);
+	while (i--)
+	{
+		code = 1;
+		if (tmp->value != args->max_i && tmp->value != args->mid_i
+			&& tmp->value != args->min_i)
+		{
+			// tmp->next->size = tmp->size - 1;
+			pb(&tmp, head_b);
+			code = 0;
+		}
+		// print_stacks(head_a, head_b);
+		if (code)
+		{
+			rotate(&tmp);
+			printf("ra\n");
+		}
+	}
+	(*head_a) = tmp;
+	// printf("!!!!!!!!!!!!\n");
+	// print_stacks(&tmp, head_b);
+}
+
+static void		spin_stack(t_lst **head_a, t_lst **head_b)
+{
+	t_lst		*end_a;
+
+	end_a = (*head_a)->prev;
+	while ((*head_b)->value < end_a->value && (*head_b)->value > (*head_a)->value)
+	{
+		// print_stacks(head_a, head_b);
+		rotate(head_a);
+		printf("ra\n");
+		// print_stacks(head_a, head_b);
+	}
+	end_a = (*head_a)->prev;
+	if ((*head_b)->value < (*head_a)->value && (*head_b)->value < end_a->value)
+	{
+		while ((*head_b)->value < end_a->value)
+		{
+			rev_rotate(head_a);
+			printf("rra\n");
+			// print_stacks(head_a, head_b);
+			end_a = (*head_a)->prev;
+		}
+	}
+	if ((*head_b)->value > (*head_a)->value && (*head_b)->value > end_a->value)
+	{
+		while((*head_b)->value > (*head_a)->value)
+		{
+			// print_stacks(head_a, head_b);
+			rotate(head_a);
+			// print_stacks(head_a, head_b);
+		}
+	}
+}
+
+static void		sort_lists(t_lst **head_a, t_lst **head_b)
+{
+	t_lst		*end_a;
+	// t_lst		*crnt_b;
+	size_t		b_size;
+
+	b_size = (*head_b)->size;
+	// print_stacks(head_a, head_b);
+	// while stack.b has elements
+	while (b_size--)
+	{
+		spin_stack(head_a, head_b);
+		end_a = (*head_a)->prev;
+		if ((*head_b)->value > end_a->value && (*head_b)->value < (*head_a)->value)
+		{
+			// print_stacks(head_a, head_b);
+			pa(head_a, head_b);
+			printf("pa\n");
+			// print_stacks(head_a, head_b);
+		}
 	}
 }
 
@@ -260,19 +368,24 @@ int				main(int ac, char **av)
 		!(args_to_array(&head, &args)))
 			return (ft_error());
 		stack.a = head;
-		printf("size = %d\n", head->size);
 		if (head->size > 5)
 		{
 			start_a = from_a_to_b(&args, &stack.a, &stack.b);
-			// sort_lists(&start_a, &stack.b);
-			printf("STACKS\n");
-			print_stacks(&start_a, &stack.b);
+			leave_3_nbrs_in_a(&start_a, &stack.b, &args);
+			sort_3_numbers(&start_a);
+			sort_lists(&start_a, &stack.b);
 		}
 		else if (head->size == 3)
 		{
 			sort_3_numbers(&stack.a);
-			print_stacks(&stack.a, &stack.b);
+			// print_stacks(&stack.a, &stack.b);
 		}
+		// else if (head->size > 3 && head->size <= 5)
+		// {
+			// sort_5_numbers(&stack.a, &stack.b);
+		// }
+		// printf("---------------------\n");
+		// print_stacks(&start_a, &stack.b);
 	}
 	return (0);
 }
