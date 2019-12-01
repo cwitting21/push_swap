@@ -10,5 +10,6 @@ t_lst			*new_lst(int value)
 	new->next = new;
 	new->prev = new;
 	new->size = 0;
+	new->oper = 0;
 	return (new);
 }

@@ -13,6 +13,7 @@ typedef struct		s_lst
 	struct s_lst	*prev;
 	struct s_lst	*next;
 	size_t			size;
+	int				oper;
 }					t_lst;
 
 typedef struct		s_args
@@ -29,13 +30,36 @@ typedef struct		s_stack
 {
 	t_lst			*a;
 	t_lst			*b;
+	size_t			size_a;
+	size_t			size_b;
 }					t_stack;
+
+typedef struct		s_solution
+{
+	int				num_ra;
+	int				num_rb;
+	int				num_rra;
+	int				num_rrb;
+	int				num_rr;
+	int				num_rrr;
+	int				num_all;
+}					t_solution;
 
 typedef enum		e_bool
 {
 					true = 1,
 					false = !true
 }					t_bool;
+
+typedef enum		e_direction
+{
+					UP = 0,
+					DOWN = 1,
+					UP_DOWN = 2,
+					DOWN_UP = 3,
+					FIRST = UP,
+					LAST = DOWN_UP
+}					t_direction;
 
 int					args_to_lst(int ac, char **av, t_lst **head);
 int					pb(t_lst **head_a, t_lst **head_b);
