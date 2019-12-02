@@ -12,7 +12,7 @@
 
 CHECKER = checker
 PUSH_SWAP = push_swap
-CC = gcc -g
+CC = gcc -g -O0
 FLAGS = -Wall -Wextra -Werror
 
 LIB_DIR = ./libft/

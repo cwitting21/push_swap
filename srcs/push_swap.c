@@ -186,11 +186,13 @@ static int		initialise_args(t_args *args, size_t size)
 {
 	if (!(args->arr = malloc(sizeof(int) * size)))
 			return (0);
+	// gl++;
 	ft_bzero(args->arr, sizeof(args->arr));
 	args->max_i = 0;
 	args->mid_s = 0;
 	args->mid_e = 0;
 	args->min_i = 0;
+	// printf("GL = %d\n", gl);
 	return (1);
 }
 
@@ -228,15 +230,6 @@ static void		sort_3_numbers(t_lst **h)
 		printf("rra\n");
 	}
 }
-
-// static void		sort_5_numbers(t_lst **head_a, t_lst **head_b)
-// {
-// 	while ((*head_a)->size > 3)
-// 		pb(head_a, head_b);
-// 	sort_3_numbers(head_a);
-// 	printf("!!!!!!!!!!!!!!!!!!!!\n");
-// 	print_stacks(head_a, head_b);
-// }
 
 static void		leave_3_nbrs_in_a(t_lst **head_a, t_lst **head_b, t_args *args)
 {
@@ -421,42 +414,25 @@ static t_solution		check_stack_b(t_stack *stacks)
 	return (best_sol);
 }
 
-static void		sort_lists(t_lst **head_a, t_lst **head_b)
+static void		clean_one_stack(t_lst *head, size_t size)
 {
-	t_lst		*end_a;
-	// t_lst		*crnt_b;
-	size_t		b_size;
-	t_solution	sol;
-	t_stack				stacks;
-
-	b_size = (*head_b)->size;
-	stacks.size_a = (*head_a)->size;
-	stacks.size_b = (*head_b)->size;
-	stacks.a = (*head_a);
-	stacks.b = (*head_b);
-	// print_stacks(head_a, head_b);
-	// while stack.b has elements
-	while (stacks.size_b)
+	if (size)
 	{
-		sol = check_stack_b(&stacks);
-		spin_stack(&stacks, sol);
-		// end_a = (*head_a)->prev;
-		// if ((*head_b)->value > end_a->value && (*head_b)->value < (*head_a)->value)
-		// {
-			// print_stacks(head_a, head_b);
-
-			// print_stacks(&stacks.a, &stacks.b);
-			pa(&stacks.a, &stacks.b);
-			// print_stacks(&stacks.a, &stacks.b);
-			printf("pa\n");
-			--stacks.size_b;
-			++stacks.size_a;
-			// print_stacks(&stacks.a, &stacks.b);
-		// }
+		clean_one_stack(head->next, size - 1);
+		if (head)
+		{
+			gl1++;
+			free(head);
+			head = NULL;
+		}
 	}
-	// final_sort(&start_a, args);
-	// printf("--------- END -----------\n");
-	// print_stacks(&stacks.a, &stacks.b);
+	// printf("LALALA = %d\n", gl1);
+}
+
+static void		destroy_stack(t_stack *stacks)
+{
+	clean_one_stack(stacks->a, stacks->size_a);
+	clean_one_stack(stacks->b, stacks->size_b);
 }
 
 static void		final_sort(t_lst **head, t_args args)
@@ -498,19 +474,59 @@ static void		final_sort(t_lst **head, t_args args)
 	}
 }
 
-void			test_sort(t_lst **head_a, t_lst **head_b)
+static void		sort_lists_hard(t_lst **head_a, t_lst **head_b, t_args args)
 {
-	size_t		tmp;
-	t_lst		*end;
+	t_lst		*end_a;
+	// t_lst		*crnt_b;
+	size_t		b_size;
+	t_solution	sol;
+	t_stack				stacks;
 
-	tmp = (*head_b)->size;
-	end = (*head_b);
-	// go through stack b and calculate nbr of operations for each element
-	while (tmp--)
+	b_size = (*head_b)->size;
+	stacks.size_a = (*head_a)->size;
+	stacks.size_b = (*head_b)->size;
+	stacks.a = (*head_a);
+	stacks.b = (*head_b);
+	// print_stacks(head_a, head_b);
+	// while stack.b has elements
+	while (stacks.size_b)
 	{
-		
-		end = end->next;
+		sol = check_stack_b(&stacks);
+		spin_stack(&stacks, sol);
+		// end_a = (*head_a)->prev;
+		// if ((*head_b)->value > end_a->value && (*head_b)->value < (*head_a)->value)
+		// {
+			// print_stacks(head_a, head_b);
+
+			// print_stacks(&stacks.a, &stacks.b);
+			pa(&stacks.a, &stacks.b);
+			// print_stacks(&stacks.a, &stacks.b);
+			printf("pa\n");
+			--stacks.size_b;
+			++stacks.size_a;
+			// print_stacks(&stacks.a, &stacks.b);
+		// }
 	}
+	final_sort(&stacks.a, args);
+	// printf("--------- END -----------\n");
+	// print_stacks(&stacks.a, &stacks.b);
+	destroy_stack(&stacks);
+}
+
+// static void		sort_lists_simple(t_lst **head_a, t_lst **head_b)
+// {
+
+// }
+
+static void		sort_5_numbers(t_lst **head_a, t_lst **head_b)
+{
+	while ((*head_a)->size > 3)
+		pb(head_a, head_b);
+	sort_3_numbers(head_a);
+	printf("!!!!!!!!!!!!!!!!!!!!\n");
+	print_stacks(head_a, head_b);
+	// sort_lists_simple(head_a, head_b);
+	print_stacks(head_a, head_b);
 }
 
 int				main(int ac, char **av)
@@ -534,29 +550,18 @@ int				main(int ac, char **av)
 			start_a = from_a_to_b(&args, &stack.a, &stack.b);
 			leave_3_nbrs_in_a(&start_a, &stack.b, &args);
 			sort_3_numbers(&start_a);
-			// print_stacks(&start_a, &stack.b);
-			// start here
-			// test_sort(&start_a, &stack.b);
-			sort_lists(&start_a, &stack.b);
-			// print_stacks(&start_a, &stack.b);
-			// print_stacks(&start_a, &stack.b);
+			sort_lists_hard(&start_a, &stack.b, args);
 		}
 		else if (head->size == 3)
 		{
 			sort_3_numbers(&stack.a);
 		}
-		// else if (head->size > 3 && head->size <= 5)
-		// {
-			// sort_5_numbers(&stack.a, &stack.b);
-		// }
-		// printf("ARGS\n");
-		// printf("min = %d\n", args.min_i);
-		// printf("mid = %d\n", args.mid_i);
-		// printf("max = %d\n", args.max_i);
-		// printf("mid_start = %d\n", args.mid_s);
-		// printf("mid_end = %d\n", args.mid_e);
-		// printf("--------- END -----------\n");
-		// print_stacks();
+		else if (head->size > 3 && head->size <= 5)
+		{
+			sort_5_numbers(&stack.a, &stack.b);
+		}
 	}
+	// exit(EXIT_SUCCESS);
+	free(args.arr);
 	return (0);
 }

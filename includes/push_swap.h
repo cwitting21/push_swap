@@ -6,6 +6,8 @@
 # include <stdio.h>
 # include <unistd.h>
 
+static int			gl = 0;
+static int			gl1 = 0;
 
 typedef struct		s_lst
 {

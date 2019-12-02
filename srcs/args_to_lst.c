@@ -36,6 +36,11 @@ static t_lst	*push_lst_to_end(t_lst *head, t_lst *new)
 	return (head);
 }
 
+// static int			check_if_neg_is_valid(char *ptr)
+// {
+
+// }
+
 static int			valid_args(char *ptr, int ac, char  **av)
 {
 	int				i;
@@ -48,6 +53,8 @@ static int			valid_args(char *ptr, int ac, char  **av)
 		ptr = av[i];
 		while (*ptr)
 		{
+			// if (*ptr == '-')
+			// 	check_if_neg_is_valid(ptr);
 			if (!((*ptr >= 0 + '0' && *ptr <= 9 + '0') || *ptr == ' ' || *ptr == '"'))
 				return (0);
 			++ptr;
