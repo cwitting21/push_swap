@@ -117,16 +117,21 @@ static int			bubble_sort_arr_args(t_args *args, size_t size)
 static t_lst		*from_a_to_b(t_args *args, t_lst **head_a, t_lst **head_b)
 {
 	t_lst			*end_a;
-	t_lst			*end_b;
 	t_lst			*start_a = NULL;
 	int				code;
 	int				tmp = (*head_a)->size;
 
 	end_a = (*head_a);
-	if (*head_b)
-		end_b = (*head_b)->prev;
+	// printf("args:\n");
+	// printf("min = %d\n", args->min_i);
+	// printf("mid = %d\n", args->mid_i);
+	// printf("mid_s = %d\n", args->mid_s);
+	// printf("mid_e = %d\n", args->mid_e);
+	// printf("max = %d\n", args->max_i);
 	while (tmp-- || tmp > 3)
 	{
+		// print_stacks(&end_a, head_b);
+		// printf("CUR VAL = %d\n", end_a->value);
 		code = 1;
 		if (end_a->value > args->min_i && end_a->value < args->mid_s)
 		{
@@ -136,14 +141,14 @@ static t_lst		*from_a_to_b(t_args *args, t_lst **head_a, t_lst **head_b)
 			printf("rb\n");
 			code = 0;
 		}
-		else if (end_a->value >= args->mid_s && end_a->value < args->mid_e
+		else if (end_a->value >= args->mid_s && end_a->value <= args->mid_e
 		&& end_a->value != args->mid_i)
 		{
 			pb(&end_a, head_b);
 			printf("pb\n");
 			code = 0;
 		}
-		else if (end_a->value >= args->mid_e && end_a->value <= args->max_i)
+		else if (end_a->value > args->mid_e && end_a->value <= args->max_i)
 		{
 			rotate(&end_a);
 			printf("ra\n");
@@ -179,6 +184,10 @@ static int			args_to_array(t_lst **head, t_args *args)
 	}
 	args->arr[i] = end->value;
 	++i;
+	printf("----------ARGS--------\n");
+	for (int i = 0; i < 5; i++)
+		printf("%d ", args->arr[i]);
+	printf("\n\n");
 	return (bubble_sort_arr_args(args, (*head)->size));
 }
 
@@ -198,6 +207,8 @@ static int		initialise_args(t_args *args, size_t size)
 
 static void		sort_3_numbers(t_lst **h)
 {
+	// printf("STACK A\n");
+	// test_print(h);
 	if ((*h)->value < (*h)->prev->value && (*h)->prev->value < (*h)->next->value)
 	{
 		rev_rotate(h);
@@ -207,10 +218,12 @@ static void		sort_3_numbers(t_lst **h)
 	}
 	else if ((*h)->value > (*h)->prev->value && (*h)->prev->value > (*h)->next->value)
 	{
-		rev_rotate(h);
-		printf("rra\n");
-		rev_rotate(h);
-		printf("rra\n");
+		rotate(h);
+		printf("ra\n");
+		// rev_rotate(h);
+		// printf("rra\n");
+		// rev_rotate(h);
+		// printf("rra\n");
 	}
 	else if ((*h)->value > (*h)->next->value && (*h)->prev->value > (*h)->value)
 	{
@@ -229,6 +242,8 @@ static void		sort_3_numbers(t_lst **h)
 		rev_rotate(h);
 		printf("rra\n");
 	}
+	// printf("STACK A\n");
+	// test_print(h);
 }
 
 static void		leave_3_nbrs_in_a(t_lst **head_a, t_lst **head_b, t_args *args)
@@ -256,17 +271,10 @@ static void		leave_3_nbrs_in_a(t_lst **head_a, t_lst **head_b, t_args *args)
 		}
 	}
 	(*head_a) = tmp;
-	// printf("\n\n");
-	// printf("!!!!! 3 NUMBERS IN STACK A!!!!!!!\n");
-	// printf("\n\n");
-	// print_stacks(&tmp, head_b);
 }
 
 static void		spin_stack(t_stack *stacks, t_solution sol)
 {
-	t_lst		*end_a;
-
-	// end_a = stacks->a->prev;
 	while (sol.num_ra-- > 0)
 	{
 		rotate(&stacks->a);
@@ -299,35 +307,6 @@ static void		spin_stack(t_stack *stacks, t_solution sol)
 		rev_rotate(&stacks->b);
 		printf("rrr\n");
 	}
-	// while ((*head_b)->value < end_a->value && (*head_b)->value > (*head_a)->value)
-	// {
-	// 	// print_stacks(head_a, head_b);
-	// 	rotate(head_a);
-	// 	printf("ra\n");
-	// 	// print_stacks(head_a, head_b);
-	// }
-	// end_a = (*head_a)->prev;
-	// if ((*head_b)->value < (*head_a)->value && (*head_b)->value < end_a->value)
-	// {
-	// 	while ((*head_b)->value < end_a->value)
-	// 	{
-	// 		rev_rotate(head_a);
-	// 		printf("rra\n");
-	// 		// print_stacks(head_a, head_b);
-	// 		end_a = (*head_a)->prev;
-	// 		// print_stacks(head_a, head_b);
-	// 	}
-	// }
-	// if ((*head_b)->value > (*head_a)->value && (*head_b)->value > end_a->value)
-	// {
-	// 	while((*head_b)->value > (*head_a)->value)
-	// 	{
-	// 		// print_stacks(head_a, head_b);
-	// 		rotate(head_a);
-	// 		printf("ra\n");
-	// 		// print_stacks(head_a, head_b);
-	// 	}
-	// }
 }
 
 static int				get_insert_index(t_lst **head_a, int num)
@@ -378,7 +357,7 @@ static t_solution		get_solution(t_stack *stacks, int num, size_t i) // i - index
 	cur_dir = FIRST;
 	min_cmd = solve[FIRST].num_all;
 	best_dir = cur_dir;
-	while(cur_dir != LAST)
+	while(cur_dir <= LAST)
 	{
 		if (solve[cur_dir].num_all < min_cmd)
 		{
@@ -435,7 +414,7 @@ static void		destroy_stack(t_stack *stacks)
 	clean_one_stack(stacks->b, stacks->size_b);
 }
 
-static void		final_sort(t_lst **head, t_args args)
+static void		final_sort(t_lst **head, t_args *args)
 {
 	t_lst		*tmp;
 	t_lst		*tmp2;
@@ -446,19 +425,19 @@ static void		final_sort(t_lst **head, t_args args)
 	n = 0;
 	tmp = (*head);
 	tmp2 = (*head);
-	while (tmp->value != args.min_i)
+	while (tmp->value != args->min_i)
 	{
 		rev_rotate(&tmp);
 		++i;
 	}
-	while (tmp2->value != args.min_i)
+	while (tmp2->value != args->min_i)
 	{
 		rotate(&tmp2);
 		++n;
 	}
 	if (i < n)
 	{
-		while ((*head)->value != args.min_i)
+		while ((*head)->value != args->min_i)
 		{
 			rev_rotate(head);
 			printf("rra\n");
@@ -466,7 +445,7 @@ static void		final_sort(t_lst **head, t_args args)
 	}
 	else
 	{
-		while ((*head)->value != args.min_i)
+		while ((*head)->value != args->min_i)
 		{
 			rotate(head);
 			printf("ra\n");
@@ -474,7 +453,7 @@ static void		final_sort(t_lst **head, t_args args)
 	}
 }
 
-static void		sort_lists_hard(t_lst **head_a, t_lst **head_b, t_args args)
+static void		sort_lists_hard(t_lst **head_a, t_lst **head_b, t_args *args)
 {
 	t_lst		*end_a;
 	// t_lst		*crnt_b;
@@ -513,19 +492,223 @@ static void		sort_lists_hard(t_lst **head_a, t_lst **head_b, t_args args)
 	destroy_stack(&stacks);
 }
 
-// static void		sort_lists_simple(t_lst **head_a, t_lst **head_b)
-// {
+static int		list_is_sorted(t_lst *head)
+{
+	t_lst		*cur;
 
+	cur = head;
+	while (cur->next != head)
+	{
+		if (cur->value > cur->next->value)
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
+}
+
+static size_t	get_index_simple_sort(t_lst **head, t_args *args)
+{
+	size_t		i;
+	t_lst		*cur;
+	int			min;
+
+	i = 0;
+	cur = (*head);
+	min = cur->value;
+	while (cur->next != (*head))
+	{
+		if (cur->value < min)
+			min = cur->value;
+		cur = cur->next;
+	}
+	if (cur->value < min)
+		min = cur->value;
+	cur = (*head);
+	while (cur->value != min)
+	{
+		++i;
+		cur = cur->next;
+	}
+	return (i);
+}
+
+static size_t		get_insert_index_simple_max(t_lst **h, t_args *args)
+{
+	size_t		i;
+	int			max_in_a;
+	t_lst		*cur;
+
+	i = 0;
+	cur = (*h);
+	max_in_a = cur->value;
+	while (cur->next != (*h))
+	{
+		if (cur->value > max_in_a)
+			max_in_a = cur->value;
+		cur = cur->next;
+	}
+	if (cur->value > max_in_a)
+			max_in_a = cur->value;
+	cur = (*h);
+	while (cur->value != max_in_a)
+	{
+		++i;
+		cur = cur->next;
+	}
+	if ((*h)->size == 3 && i == 2)
+		return (0);
+	return (i + 1);
+}
+
+static int		is_smallest(t_lst **head_a, int val)
+{
+	t_lst		*cur;
+
+	cur = (*head_a);
+	while (cur->next != (*head_a))
+	{
+		if (val > cur->value)
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
+}
+
+// static size_t	get_index_test(t_lst **h, int val)
+// {
+// 	t_lst		*cur;
+// 	size_t		i;
+
+// 	cur = (*h);
+// 	while (cur->next != (*h))
+// 	{
+// 		++i;
+// 		if (cur->value > val)
+// 			return (i);
+// 		cur = cur->next;
+// 	}
+// 	return (i);
 // }
 
-static void		sort_5_numbers(t_lst **head_a, t_lst **head_b)
+static void		sort_lists_simple(t_lst **head_a, t_lst **head_b, t_args *args)
 {
-	while ((*head_a)->size > 3)
-		pb(head_a, head_b);
-	sort_3_numbers(head_a);
-	printf("!!!!!!!!!!!!!!!!!!!!\n");
+	t_lst		*end_a;
+	size_t		i;
+
+
 	print_stacks(head_a, head_b);
-	// sort_lists_simple(head_a, head_b);
+	end_a = (*head_a)->prev;
+	print_stacks(head_a, head_b);
+	if ((*head_b)->value == args->max_i)
+	{
+		i = get_insert_index_simple_max(head_a, args);
+		while (i--)
+		{
+			rotate(head_a);
+			printf("ra\n");
+			print_stacks(head_a, head_b);
+		}
+		print_stacks(head_a, head_b);
+		pa(head_a, head_b);
+		printf("pa\n");
+		print_stacks(head_a, head_b);
+	}
+	else if ((*head_b)->value > end_a->value && (*head_b)->value < (*head_a)->value)
+	{
+		pa(head_a, head_b);
+		printf("pa\n");
+		print_stacks(head_a, head_b);
+	}
+	else if ((*head_b)->value == args->min_i)
+	{
+		i = get_index_simple_sort(head_a, args);
+		while (i--)
+		{
+			rotate(head_a);
+			printf("ra\n");
+		}
+		pa(head_a, head_b);
+		printf("pa\n");
+		print_stacks(head_a, head_b);
+	}
+	else if ((*head_b)->value > end_a->value && (*head_b)->value > (*head_a)->value && (*head_b)->value > (*head_a)->next->value && (*head_a)->size == 3)
+	{
+		// i = get_index_test(head_a, (*head_b)->value);
+		// while (i--)
+		// {
+		// 	rotate(head_a);
+		// 	printf("ra\n");
+		// }
+		pa(head_a, head_b);
+		printf("pa\n");
+		print_stacks(head_a, head_b);
+	}
+	else if ((*head_b)->value > end_a->value && (*head_b)->value > (*head_a)->value && (*head_b)->value != args->max_i)
+	{
+		while ((*head_b)->value < end_a->value || (*head_b)->value > (*head_a)->value)
+		{
+			rotate(head_a);
+			printf("ra\n");
+			print_stacks(head_a, head_b);
+			end_a = (*head_a)->prev;
+		}
+		pa(head_a, head_b);
+		printf("pa\n");
+		print_stacks(head_a, head_b);
+	}
+	else if ((*head_b)->value < end_a->value && (*head_b)->value != args->min_i && is_smallest(head_a, (*head_b)->value))
+	{
+		pa(head_a, head_b);
+		printf("pa\n");
+		print_stacks(head_a, head_b);
+	}
+	else if ((*head_b)->value < end_a->value && (*head_b)->value != args->min_i)
+	{
+		while ((*head_b)->value < end_a->value || (*head_b)->value > (*head_a)->value)
+		{
+			rotate(head_a);
+			printf("ra\n");
+			print_stacks(head_a, head_b);
+			end_a = (*head_a)->prev;
+		}
+		pa(head_a, head_b);
+		printf("pa\n");
+		print_stacks(head_a, head_b);
+	}
+	print_stacks(head_a, head_b);
+}
+
+static void		sort_5_numbers(t_lst **head_a, t_lst **head_b, t_args *args)
+{
+	size_t		tmp;
+
+	while ((*head_a)->size > 3)
+	{
+		pb(head_a, head_b);
+		printf("pb\n");
+	}
+	// sort_3_numbers(head_a);
+	// printf("!!!!!!!!!!!!!!!!!!!!\n");
+	// print_stacks(head_a, head_b);
+	// printf("--------------\n");
+	sort_3_numbers(head_a);
+	// printf("--------------\n");
+	// print_stacks(head_a, head_b);
+	tmp = (*head_a)->size;
+	// print_stacks(head_a, head_b);
+	while (tmp++ < 5)
+	{
+		// printf("!!!!!!!!!\n");
+		sort_lists_simple(head_a, head_b, args);
+		// print_stacks(head_a, head_b);
+		// print_stacks(head_a, head_b);
+		// pa(head_a, head_b);
+		// printf("pa\n");
+		// tmp = (*head_a)->size;
+		// print_stacks(head_a, head_b);
+		// sort_lists_hard(head_a, head_b, args);
+	}
+	final_sort(head_a, args);
 	print_stacks(head_a, head_b);
 }
 
@@ -545,20 +728,23 @@ int				main(int ac, char **av)
 		!(args_to_array(&head, &args)))
 			return (ft_error());
 		stack.a = head;
-		if (head->size > 5)
+		if (!list_is_sorted(stack.a))
 		{
-			start_a = from_a_to_b(&args, &stack.a, &stack.b);
-			leave_3_nbrs_in_a(&start_a, &stack.b, &args);
-			sort_3_numbers(&start_a);
-			sort_lists_hard(&start_a, &stack.b, args);
-		}
-		else if (head->size == 3)
-		{
-			sort_3_numbers(&stack.a);
-		}
-		else if (head->size > 3 && head->size <= 5)
-		{
-			sort_5_numbers(&stack.a, &stack.b);
+			if (head->size > 5)
+			{
+				start_a = from_a_to_b(&args, &stack.a, &stack.b);
+				leave_3_nbrs_in_a(&start_a, &stack.b, &args);
+				sort_3_numbers(&start_a);
+				sort_lists_hard(&start_a, &stack.b, &args);
+			}
+			else if (head->size == 3)
+				sort_3_numbers(&stack.a);
+			else if (head->size > 3 && head->size <= 5)
+				sort_5_numbers(&stack.a, &stack.b, &args);
+		// else if (head->size > 3 && head->size <= 5)
+		// {
+		// 	// sort_5_numbers(&stack.a, &stack.b);
+		// }
 		}
 	}
 	// exit(EXIT_SUCCESS);
