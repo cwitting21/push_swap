@@ -184,10 +184,10 @@ static int			args_to_array(t_lst **head, t_args *args)
 	}
 	args->arr[i] = end->value;
 	++i;
-	printf("----------ARGS--------\n");
-	for (int i = 0; i < 5; i++)
-		printf("%d ", args->arr[i]);
-	printf("\n\n");
+	// printf("----------ARGS--------\n");
+	// for (int i = 0; i < 5; i++)
+	// 	printf("%d ", args->arr[i]);
+	// printf("\n\n");
 	return (bubble_sort_arr_args(args, (*head)->size));
 }
 
@@ -596,9 +596,9 @@ static void		sort_lists_simple(t_lst **head_a, t_lst **head_b, t_args *args)
 	size_t		i;
 
 
-	print_stacks(head_a, head_b);
+	// print_stacks(head_a, head_b);
 	end_a = (*head_a)->prev;
-	print_stacks(head_a, head_b);
+	// print_stacks(head_a, head_b);
 	if ((*head_b)->value == args->max_i)
 	{
 		i = get_insert_index_simple_max(head_a, args);
@@ -606,18 +606,18 @@ static void		sort_lists_simple(t_lst **head_a, t_lst **head_b, t_args *args)
 		{
 			rotate(head_a);
 			printf("ra\n");
-			print_stacks(head_a, head_b);
+			// print_stacks(head_a, head_b);
 		}
-		print_stacks(head_a, head_b);
+		// print_stacks(head_a, head_b);
 		pa(head_a, head_b);
 		printf("pa\n");
-		print_stacks(head_a, head_b);
+		// print_stacks(head_a, head_b);
 	}
 	else if ((*head_b)->value > end_a->value && (*head_b)->value < (*head_a)->value)
 	{
 		pa(head_a, head_b);
 		printf("pa\n");
-		print_stacks(head_a, head_b);
+		// print_stacks(head_a, head_b);
 	}
 	else if ((*head_b)->value == args->min_i)
 	{
@@ -629,7 +629,7 @@ static void		sort_lists_simple(t_lst **head_a, t_lst **head_b, t_args *args)
 		}
 		pa(head_a, head_b);
 		printf("pa\n");
-		print_stacks(head_a, head_b);
+		// print_stacks(head_a, head_b);
 	}
 	else if ((*head_b)->value > end_a->value && (*head_b)->value > (*head_a)->value && (*head_b)->value > (*head_a)->next->value && (*head_a)->size == 3)
 	{
@@ -641,7 +641,7 @@ static void		sort_lists_simple(t_lst **head_a, t_lst **head_b, t_args *args)
 		// }
 		pa(head_a, head_b);
 		printf("pa\n");
-		print_stacks(head_a, head_b);
+		// print_stacks(head_a, head_b);
 	}
 	else if ((*head_b)->value > end_a->value && (*head_b)->value > (*head_a)->value && (*head_b)->value != args->max_i)
 	{
@@ -649,18 +649,18 @@ static void		sort_lists_simple(t_lst **head_a, t_lst **head_b, t_args *args)
 		{
 			rotate(head_a);
 			printf("ra\n");
-			print_stacks(head_a, head_b);
+			// print_stacks(head_a, head_b);
 			end_a = (*head_a)->prev;
 		}
 		pa(head_a, head_b);
 		printf("pa\n");
-		print_stacks(head_a, head_b);
+		// print_stacks(head_a, head_b);
 	}
 	else if ((*head_b)->value < end_a->value && (*head_b)->value != args->min_i && is_smallest(head_a, (*head_b)->value))
 	{
 		pa(head_a, head_b);
 		printf("pa\n");
-		print_stacks(head_a, head_b);
+		// print_stacks(head_a, head_b);
 	}
 	else if ((*head_b)->value < end_a->value && (*head_b)->value != args->min_i)
 	{
@@ -668,14 +668,14 @@ static void		sort_lists_simple(t_lst **head_a, t_lst **head_b, t_args *args)
 		{
 			rotate(head_a);
 			printf("ra\n");
-			print_stacks(head_a, head_b);
+			// print_stacks(head_a, head_b);
 			end_a = (*head_a)->prev;
 		}
 		pa(head_a, head_b);
 		printf("pa\n");
-		print_stacks(head_a, head_b);
+		// print_stacks(head_a, head_b);
 	}
-	print_stacks(head_a, head_b);
+	// print_stacks(head_a, head_b);
 }
 
 static void		sort_5_numbers(t_lst **head_a, t_lst **head_b, t_args *args)
@@ -687,18 +687,10 @@ static void		sort_5_numbers(t_lst **head_a, t_lst **head_b, t_args *args)
 		pb(head_a, head_b);
 		printf("pb\n");
 	}
-	// sort_3_numbers(head_a);
-	// printf("!!!!!!!!!!!!!!!!!!!!\n");
-	// print_stacks(head_a, head_b);
-	// printf("--------------\n");
 	sort_3_numbers(head_a);
-	// printf("--------------\n");
-	// print_stacks(head_a, head_b);
 	tmp = (*head_a)->size;
-	// print_stacks(head_a, head_b);
-	while (tmp++ < 5)
+	while (tmp++ < 5 && (*head_b))
 	{
-		// printf("!!!!!!!!!\n");
 		sort_lists_simple(head_a, head_b, args);
 		// print_stacks(head_a, head_b);
 		// print_stacks(head_a, head_b);
@@ -709,7 +701,7 @@ static void		sort_5_numbers(t_lst **head_a, t_lst **head_b, t_args *args)
 		// sort_lists_hard(head_a, head_b, args);
 	}
 	final_sort(head_a, args);
-	print_stacks(head_a, head_b);
+	// print_stacks(head_a, head_b);
 }
 
 int				main(int ac, char **av)

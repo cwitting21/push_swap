@@ -1,5 +1,32 @@
 #include "../includes/push_swap.h"
 
+static void		test_print(t_lst **head)
+{
+	t_lst		*end;
+
+	if (*head)
+	{
+		end = *head;
+		while (end->next && end->next != *head)
+		{
+			printf("%d\n", end->value);
+			end = end->next;
+		}
+		printf("%d\n", end->value);
+		printf("size = %zu\n", (*head)->size);
+	}
+	else
+		printf("stack is empty\n");
+}
+
+static void				print_stacks(t_lst **head_a, t_lst **head_b)
+{
+	printf("-----STACK A-------\n");
+	test_print(head_a);
+	printf("-----STACK B-------\n");
+	test_print(head_b);
+}
+
 static int				ft_error()
 {
 	write(1, "Error\n", 6);
@@ -196,10 +223,9 @@ int					main(int ac, char **av)
 		if (!(args_to_lst(ac, av, &head)) || !(initialise_args(&args, head->size)) ||
 		!(args_to_array(&head, &args)))
 			return (ft_error());
-		args_to_array(&head, &args);
 		stack.a = head;
 		read_commands(&stack.a, &stack.b);
-		if (stack_is_sorted(&stack.a))
+		if (stack_is_sorted(&stack.a, &stack.b))
 			printf("OK\n");
 		else
 			printf("KO\n");

@@ -1,20 +1,20 @@
 #include "../includes/push_swap.h"
 
-int         stack_is_sorted(t_lst **head)
+int         stack_is_sorted(t_lst **head_a, t_lst **head_b)
 {
-	t_lst   *end;
+	t_lst   *end_a;
 
-	end = (*head)->next;
-	if (!((*head)->value < (*head)->next->value
-		&& (*head)->value < (*head)->prev->value))
+	end_a = (*head_a)->next;
+	if (!((*head_a)->value < (*head_a)->next->value
+		&& (*head_a)->value < (*head_a)->prev->value))
 		return (0);
-	while (end->next && end->next != (*head))
+	while (end_a->next && end_a->next != (*head_a))
 	{
-		if (!(end->value > end->prev->value && end->value < end->next->value))
+		if (!(end_a->value > end_a->prev->value && end_a->value < end_a->next->value))
 			return (0);
-		end = end->next;
+		end_a = end_a->next;
 	}
-	if (!(end->value > end->prev->value && end->value > (*head)->value))
+	if (!(end_a->value > end_a->prev->value && end_a->value > (*head_a)->value) || (*head_b))
 		return (0);
 	return (1);
 }
