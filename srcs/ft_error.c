@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ss.c                                               :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/04 04:44:30 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 05:49:00 by cwitting         ###   ########.fr       */
+/*   Created: 2019/12/04 04:17:49 by cwitting          #+#    #+#             */
+/*   Updated: 2019/12/04 05:44:01 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		ss(t_lst **head_a, t_lst **head_b)
+int				ft_error(void)
 {
-	if (swap(head_a) && swap(head_b))
-		return (1);
+	write(1, "Error\n", 6);
 	return (0);
 }

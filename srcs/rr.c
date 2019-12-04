@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rr.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/04 04:44:17 by cwitting          #+#    #+#             */
+/*   Updated: 2019/12/04 06:00:34 by cwitting         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-int         rr(t_lst **head_a, t_lst **head_b)
+int		rr(t_lst **head_a, t_lst **head_b)
 {
-    if (rotate(head_a) && rotate(head_b))
-        return (1);
-    return (0);
+	if (rotate(head_a) && rotate(head_b))
+		return (1);
+	return (0);
 }

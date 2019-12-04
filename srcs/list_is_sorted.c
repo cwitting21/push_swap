@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_is_sorted.c                                  :+:      :+:    :+:   */
+/*   list_is_sorted.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/04 04:44:33 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 05:47:38 by cwitting         ###   ########.fr       */
+/*   Created: 2019/12/04 04:37:10 by cwitting          #+#    #+#             */
+/*   Updated: 2019/12/04 05:45:49 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int			stack_is_sorted(t_lst **head_a, t_lst **head_b)
+int		list_is_sorted(t_lst *head)
 {
-	t_lst	*end_a;
+	t_lst		*cur;
 
-	end_a = (*head_a)->next;
-	if (!((*head_a)->value < (*head_a)->next->value
-		&& (*head_a)->value < (*head_a)->prev->value))
-		return (0);
-	while (end_a->next && end_a->next != (*head_a))
+	cur = head;
+	while (cur->next != head)
 	{
-		if (!(end_a->value > end_a->prev->value
-			&& end_a->value < end_a->next->value))
+		if (cur->value > cur->next->value)
 			return (0);
-		end_a = end_a->next;
+		cur = cur->next;
 	}
-	if (!(end_a->value > end_a->prev->value
-		&& end_a->value > (*head_a)->value) || (*head_b))
-		return (0);
 	return (1);
 }

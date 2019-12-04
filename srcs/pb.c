@@ -1,33 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pb.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/04 04:42:34 by cwitting          #+#    #+#             */
+/*   Updated: 2019/12/04 04:42:35 by cwitting         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-static void		test_print(t_lst **head)
-{
-	t_lst		*end;
-
-	if (*head)
-	{
-		end = *head;
-		while (end->next && end->next != *head)
-		{
-			printf("%d\n", end->value);
-			end = end->next;
-		}
-		printf("%d\n", end->value);
-		printf("size = %zu\n", (*head)->size);
-	}
-	else
-		printf("stack is empty\n");
-}
-
-static void				print_stacks(t_lst **head_a, t_lst **head_b)
-{
-	printf("-----STACK A-------\n");
-	test_print(head_a);
-	printf("-----STACK B-------\n");
-	test_print(head_b);
-}
-
-void		stack_b_not_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
+static void		stack_b_not_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
 {
 	t_lst	*end_b;
 	t_lst	*first;
@@ -47,7 +32,7 @@ void		stack_b_not_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
 	(*head_b)->size++;
 }
 
-void		stack_b_is_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
+static void		stack_b_is_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
 {
 	t_lst	*tmp;
 

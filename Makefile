@@ -20,7 +20,11 @@ SRC_DIR = ./srcs/
 INC_DIR = ./includes/
 
 SOURCE := 	new_lst.c args_to_lst.c pb.c pa.c swap.c ss.c rotate.c rr.c \
-			rev_rotate.c rrr.c stack_is_sorted.c get_next_line.c
+			rev_rotate.c rrr.c stack_is_sorted.c get_next_line.c init_args.c \
+			sort_3_numbers.c read_commands.c ft_error.c args_to_array.c array_is_sorted.c \
+			destroy_stacks.c sort_5_numbers.c final_sort.c sort_lists_hard.c from_a_to_b.c \
+			leave_3_nbrs_in_a.c list_is_sorted.c print_stacks.c
+
 
 SRC := $(addprefix $(SRC_DIR), $(SOURCE))
 INCLUDES = push_swap.h
