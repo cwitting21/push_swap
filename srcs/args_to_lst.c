@@ -48,6 +48,31 @@ static t_lst	*push_lst_to_end(t_lst *head, t_lst *new)
 	return (head);
 }
 
+long long int		ft_atoi_local(const char *str, int neg)
+{
+	int i;
+	long long int res;
+
+	i = 0;
+	res = 0;
+	while (ft_isblank(str[i]))
+		i++;
+	// if (str[i] == '+' || str[i] == '-')
+	// {
+		// if (str[i] == '-')
+			// neg = -1;
+		// i++;
+	// }
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res *= 10;
+		res += str[i] - '0';
+		i++;
+	}
+	return (res * neg);
+}
+
+
 static int			check_if_nbr_is_valid(char *ptr)
 {
 	int				minus;
@@ -57,11 +82,11 @@ static int			check_if_nbr_is_valid(char *ptr)
 	i = 0;
 	if (*ptr == '-')
 	{
-		minus = 1;
+		minus = -1;
 		ptr++;
 	}
 	else
-		minus = 0;
+		minus = 1;
 	if (*ptr == '+')
 		ptr++;
 	tmp = ptr;
@@ -69,14 +94,18 @@ static int			check_if_nbr_is_valid(char *ptr)
 		++i;
 	if (i > 10)
 		return (0);
-	tmp = ptr;
-	for (int m = 0; m < 10; m++)
-		tmp[m] -= '0';
-	for (int m = 0; m < 10; m++)
-		printf("%d ", ptr[m]);
-	if (ptr[0] >= 2 && ptr[1] >= 1 && ptr[2] >= 4 && ptr[3] >= 7
-	&& ptr[4] >= 4 && ptr[5] >= 8 && ptr[6] >= 3 && ptr[7] >= 6
-	&& ptr[8] >= 4 && (minus ? ptr[9] == 9 : ptr[9] >= 8))
+	// for (int m = 0; m < 10; m++)
+	// 	tmp[m] -= '0';
+	// for (int m = 0; m < 10; m++)
+	// 	printf("%d ", ptr[m]);
+	// printf("\n\n");
+	// for (int m = 0; m < 10; m++)
+	// printf("ptr[m] = %d\n", ptr[m]);
+	// printf("ptr[0] = %d\n", ptr[0]);
+	// if (ptr[0] >= '2' && ptr[1] >= '1' && ptr[2] >= '4' && ptr[3] >= '7'
+	// && ptr[4] >= '4' && ptr[5] >= '8' && ptr[6] >= '3' && ptr[7] >= '6'
+	// && ptr[8] >= '4' && (minus == 1 ? ptr[9] == '9' : ptr[9] >= '8'))
+	if (ft_atoi_local(ptr, minus) >= 2147483648 || ft_atoi_local(ptr, minus) <= -2147483649)
 		return (0);
 	return (1);
 }
@@ -88,21 +117,23 @@ static int			valid_args(char *ptr, int ac, char  **av)
 {
 	int				i;
 	char			*tmp;
+	int				m;
 
 	i = 0;
+	m = 0;
 	tmp = ptr;
 	while (++i < ac)
 	{
 		ptr = av[i];
+		if (((*ptr == '-' || *ptr == '+') && !ft_isdigit(*(ptr + 1)))
+		|| !(m = check_if_nbr_is_valid(ptr)))
+			return (0);
 		while (*ptr)
 		{
-			if (((*ptr == '-' || *ptr == '+') && !ft_isdigit(*(ptr + 1)))
-			|| !check_if_nbr_is_valid(ptr))
+			if ((*ptr == '-' || *ptr == '+') && !ft_isdigit(*(ptr + 1)))
 				return (0);
-			else if ((*ptr == '-' || *ptr == '+') && !ft_isdigit(*(ptr + 1)))
-				return (0);
-			if (!((*ptr >= 0 + '0' && *ptr <= 9 + '0') || *ptr == ' ' || *ptr == '"'
-				|| *ptr == '+' || *ptr == '-'))
+			if (!((*ptr >= 0 + '0' && *ptr <= 9 + '0') || *ptr != ' ' || *ptr != '"'
+				|| ((*ptr != '+' || *ptr != '-') && ft_isdigit(*(ptr + 1)))))
 				return (0);
 			++ptr;
 		}
