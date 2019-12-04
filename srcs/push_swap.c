@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:13:06 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 12:18:12 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 19:52:07 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int				main(int ac, char **av)
 {
 	t_stack		s;
 	t_args		args;
+	t_lst		*cur;
 
 	null_args(&s);
 	if (ac > 1)
@@ -36,10 +37,17 @@ int				main(int ac, char **av)
 		if (!(args_to_lst(ac, av, &s.a))
 		|| !(init_args(&args, s.a->size)) || !(args_to_array(&s.a, &args)))
 			return (ft_error());
-		printf("ARGS\n");
-		for (int i = 0; i < s.a->size; i++)
-			printf("%d ", args.arr[i]);
-		printf("\n\n");
+		// printf("ARGS\n");
+		// int tmp = s.a->size;
+		// cur = s.a;
+		// while (tmp--)
+		// {
+		// 	printf("val = %d\n", cur->value);
+		// 	cur = cur->next;
+		// }
+		// for (int i = 0; i < s.a->size; i++)
+		// 	printf("%d ", args.arr[i]);
+		// printf("\n\n");
 		if (!list_is_sorted(s.a))
 		{
 			if (s.a->size > 5)
@@ -52,7 +60,7 @@ int				main(int ac, char **av)
 			else if (s.a->size > 3 && s.a->size <= 5)
 				sort_5_numbers(&s.a, &s.b, &args);
 		}
+		free(args.arr);
 	}
-	free(args.arr);
 	exit(EXIT_SUCCESS);
 }

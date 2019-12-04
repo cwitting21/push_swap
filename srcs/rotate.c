@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:44:14 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 06:00:10 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 19:44:21 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 int		rotate(t_lst **head)
 {
-	if ((*head)->size > 1)
+	if ((*head) && (head))
 	{
-		(*head)->next->size = (*head)->size;
-		(*head) = (*head)->next;
+		if ((*head)->next)
+		{
+			(*head)->next->size = (*head)->size;
+			(*head) = (*head)->next;
+		}
 		return (1);
 	}
 	return (0);

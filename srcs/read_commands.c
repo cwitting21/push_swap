@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:15:52 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 11:05:29 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 19:48:27 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ static void		case_2_local(t_lst **head_a, t_lst **head_b, char *line)
 	}
 	else if (!ft_strcmp("rb", line))
 	{
-		rotate(head_b);
+		printf("!!!!!!!!!!!!!\n");
+		printf("!!!!!!!!!!!!!\n");
+		if (head_b && (*head_b))
+			rotate(head_b);
 		ft_strdel(&line);
 	}
 	else if (!ft_strcmp("rr", line))
@@ -64,17 +67,20 @@ static int		case_3_local(t_lst **head_a, t_lst **head_b, char *line)
 {
 	if (!ft_strcmp("rra", line))
 	{
-		rev_rotate(head_a);
+		if (head_a && (*head_a))
+			rev_rotate(head_a);
 		ft_strdel(&line);
 	}
 	else if (!ft_strcmp("rrb", line))
 	{
-		rev_rotate(head_b);
+		if (head_b && (*head_b))
+			rev_rotate(head_b);
 		ft_strdel(&line);
 	}
 	else if (!ft_strcmp("rrr", line))
 	{
-		rrr(head_a, head_b);
+		if (head_b && (*head_b) && (head_a) && (*head_a))
+			rrr(head_a, head_b);
 		ft_strdel(&line);
 	}
 	else if (ft_strcmp("sa", line) && ft_strcmp("sb", line) &&
@@ -95,9 +101,13 @@ int				read_commands(t_lst **head_a, t_lst **head_b)
 
 	while ((tmp = get_next_line(0, &line)) == 1)
 	{
+		printf("LALA\n");
 		case_1_local(head_a, head_b, line);
+		printf("LALA\n");
 		case_2_local(head_a, head_b, line);
+		printf("LALA\n");
 		error = case_3_local(head_a, head_b, line);
+		printf("LALA\n");
 	}
 	ft_strdel(&line);
 	if (tmp == -1 || error == 0)
