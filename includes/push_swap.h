@@ -77,6 +77,8 @@ int					args_to_array(t_lst **head, t_args *args);
 int					list_is_sorted(t_lst *head);
 int					get_insert_index(t_lst **head_a, int num);
 int					ft_error(void);
+int					num_is_valid(char *ptr);
+
 
 void				sort_3_numbers(t_lst **h);
 void				destroy_stacks(t_stack *stacks);
@@ -94,10 +96,11 @@ void				case_4_simpsort(t_lst **head_a, t_lst **head_b, t_lst *end_a);
 void				print_stacks(t_lst **head_a, t_lst **head_b);
 
 t_lst				*new_lst(int value);
+t_lst				*push_lst_to_end(t_lst *head, t_lst *new);
 t_bool				array_is_sorted(int *arr);
 
-size_t		get_insert_index_simple_max(t_lst **h, t_args *args);
-size_t	get_index_simple_sort(t_lst **head, t_args *args);
+size_t				get_insert_index_simple_max(t_lst **h, t_args *args);
+size_t				get_index_simple_sort(t_lst **head, t_args *args);
 
 
 #endif

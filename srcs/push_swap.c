@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:13:06 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 19:52:07 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 20:26:41 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,6 @@ int				main(int ac, char **av)
 		if (!(args_to_lst(ac, av, &s.a))
 		|| !(init_args(&args, s.a->size)) || !(args_to_array(&s.a, &args)))
 			return (ft_error());
-		// printf("ARGS\n");
-		// int tmp = s.a->size;
-		// cur = s.a;
-		// while (tmp--)
-		// {
-		// 	printf("val = %d\n", cur->value);
-		// 	cur = cur->next;
-		// }
-		// for (int i = 0; i < s.a->size; i++)
-		// 	printf("%d ", args.arr[i]);
-		// printf("\n\n");
 		if (!list_is_sorted(s.a))
 		{
 			if (s.a->size > 5)

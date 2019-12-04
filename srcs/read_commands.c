@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:15:52 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 20:17:00 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 20:30:54 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ static void		case_2_local(t_lst **head_a, t_lst **head_b, char *line)
 	}
 }
 
+static int		str_del_and_error(char *line)
+{
+	ft_strdel(&line);
+	return (ft_error());
+}
+
 static int		case_3_local(t_lst **head_a, t_lst **head_b, char *line)
 {
 	if (!ft_strcmp("rra", line))
@@ -84,10 +90,7 @@ static int		case_3_local(t_lst **head_a, t_lst **head_b, char *line)
 	else if (ft_strcmp("sa", line) && ft_strcmp("sb", line) &&
 	ft_strcmp("ss", line) && ft_strcmp("pa", line) && ft_strcmp("pb", line)
 	&& ft_strcmp("ra", line) && ft_strcmp("rb", line) && ft_strcmp("rr", line))
-	{
-		ft_strdel(&line);
-		return (ft_error());
-	}
+		str_del_and_error(line);
 	return (1);
 }
 
