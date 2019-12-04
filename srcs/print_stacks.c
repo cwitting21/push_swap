@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:38:29 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 04:43:47 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 11:17:19 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ static void		test_print_2(t_lst **head)
 	printf("val = %d\n", end->value);
 	printf("n = %d\n", end->next->value);
 	printf("n.n = %d\n", end->next->next->value);
-	
 }
 
-void				print_stacks(t_lst **head_a, t_lst **head_b)
+void			print_stacks(t_lst **head_a, t_lst **head_b)
 {
 	printf("-----STACK A-------\n");
 	test_print(head_a);

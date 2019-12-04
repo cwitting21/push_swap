@@ -6,13 +6,13 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 09:45:02 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 09:45:16 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 11:16:45 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-size_t		get_insert_index_simple_max(t_lst **h, t_args *args)
+size_t			get_insert_index_simple_max(t_lst **h, t_args *args)
 {
 	size_t		i;
 	int			max_in_a;
@@ -40,7 +40,7 @@ size_t		get_insert_index_simple_max(t_lst **h, t_args *args)
 	return (i + 1);
 }
 
-size_t	get_index_simple_sort(t_lst **head, t_args *args)
+size_t			get_index_simple_sort(t_lst **head, t_args *args)
 {
 	size_t		i;
 	t_lst		*cur;

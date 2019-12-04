@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 06:42:28 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 06:42:38 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 10:36:54 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		case_rra_rrb(t_lst **head, int code)
 		printf("rrb\n");
 }
 
-void		spin_stack(t_stack *stacks, t_solution sol)
+void			spin_stack(t_stack *stacks, t_solution sol)
 {
 	while (sol.num_ra-- > 0)
 		case_ra_rb(&stacks->a, 0);

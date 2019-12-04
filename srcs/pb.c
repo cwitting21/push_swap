@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:42:34 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 04:42:35 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 11:15:51 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void		stack_b_not_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
 {
-	t_lst	*end_b;
-	t_lst	*first;
+	t_lst		*end_b;
+	t_lst		*first;
 
 	(*head_a)->next->size = (*head_a)->size - 1;
 	(*head_a)->next->prev = end_a;
@@ -34,7 +34,7 @@ static void		stack_b_not_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
 
 static void		stack_b_is_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
 {
-	t_lst	*tmp;
+	t_lst		*tmp;
 
 	tmp = (*head_a);
 	(*head_a) = (*head_a)->next;
@@ -48,15 +48,14 @@ static void		stack_b_is_empty(t_lst **head_a, t_lst **head_b, t_lst *end_a)
 	(*head_b)->prev = (*head_b);
 }
 
-int			pb(t_lst **head_a, t_lst **head_b)
+int				pb(t_lst **head_a, t_lst **head_b)
 {
-	t_lst	*end_a = NULL;
+	t_lst		*end_a;
 
 	end_a = (*head_a)->prev;
 	if (!*head_b && (*head_a)->size >= 3)
 	{
 		stack_b_is_empty(head_a, head_b, end_a);
-		// print_stacks(head_a, head_b);
 		return (1);
 	}
 	if (*head_b && (*head_a)->size >= 3)
