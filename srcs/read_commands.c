@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:15:52 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 19:48:27 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 20:17:00 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ static void		case_2_local(t_lst **head_a, t_lst **head_b, char *line)
 	}
 	else if (!ft_strcmp("rb", line))
 	{
-		printf("!!!!!!!!!!!!!\n");
-		printf("!!!!!!!!!!!!!\n");
 		if (head_b && (*head_b))
 			rotate(head_b);
 		ft_strdel(&line);
@@ -101,13 +99,9 @@ int				read_commands(t_lst **head_a, t_lst **head_b)
 
 	while ((tmp = get_next_line(0, &line)) == 1)
 	{
-		printf("LALA\n");
 		case_1_local(head_a, head_b, line);
-		printf("LALA\n");
 		case_2_local(head_a, head_b, line);
-		printf("LALA\n");
 		error = case_3_local(head_a, head_b, line);
-		printf("LALA\n");
 	}
 	ft_strdel(&line);
 	if (tmp == -1 || error == 0)

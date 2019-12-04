@@ -99,12 +99,9 @@ static int			args_are_garbage(int ac, char **av)
 		 ptr = av[i];
 		 while (*ptr)
 		 {
-			 if (!((*ptr >= 0 + '0' && *ptr <= 9 + '0') || ((*ptr != ' ' || *ptr != '"'
-			 || *ptr != '+' || *ptr != '-'))))
-			 {
-				 printf("WTF = %c\n", *ptr);
+			 if (!((*ptr >= 0 + '0' && *ptr <= 9 + '0') || ((*ptr == ' ' || *ptr == '"'
+			 || *ptr == '+' || *ptr == '-'))))
 				 return (1);
-			 }
 			 ptr++;
 		 }
 	 }
