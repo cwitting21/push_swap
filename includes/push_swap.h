@@ -84,6 +84,7 @@ void				final_sort(t_lst **head, t_args *args);
 void				sort_lists_hard(t_lst **head_a, t_lst **head_b, t_args *args);
 void				leave_3_nbrs_in_a(t_lst **head_a, t_lst **head_b, t_args *args);
 void				*from_a_to_b(t_args *args, t_lst **head_a, t_lst **head_b);
+void				spin_stack(t_stack *stacks, t_solution sol);
 
 
 void				print_stacks(t_lst **head_a, t_lst **head_b);

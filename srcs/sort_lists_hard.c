@@ -6,47 +6,11 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:32:37 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 04:33:12 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 06:55:10 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-static void		spin_stack(t_stack *stacks, t_solution sol)
-{
-	while (sol.num_ra-- > 0)
-	{
-		rotate(&stacks->a);
-		printf("ra\n");
-	}
-	while (sol.num_rb-- > 0)
-	{
-		rotate(&stacks->b);
-		printf("rb\n");
-	}
-	while (sol.num_rra-- > 0)
-	{
-		rev_rotate(&stacks->a);
-		printf("rra\n");
-	}
-	while (sol.num_rrb-- > 0)
-	{
-		rev_rotate(&stacks->b);
-		printf("rrb\n");
-	}
-	while (sol.num_rr-- > 0)
-	{
-		rotate(&stacks->a);
-		rotate(&stacks->b);
-		printf("rr\n");
-	}
-	while (sol.num_rrr-- > 0)
-	{
-		rev_rotate(&stacks->a);
-		rev_rotate(&stacks->b);
-		printf("rrr\n");
-	}
-}
 
 static int				get_insert_index(t_lst **head_a, int num)
 {
@@ -63,40 +27,51 @@ static int				get_insert_index(t_lst **head_a, int num)
 	return (i);
 }
 
-static t_solution		get_solution(t_stack *stacks, int num, size_t i) // i - index of element at stack b
+static void				first_step(t_solution *solve, size_t i, t_stack *s,
+						int num)
 {
-	t_solution			solve[4]; // 0 - up, 1 - down, 2 - up_down, 3 - down_up
+	solve[UP].num_rb = i;
+	solve[UP].num_ra = get_insert_index(&s->a, num);
+	solve[UP].num_rr = (solve[UP].num_rb > solve[UP].num_ra ?
+	solve[UP].num_ra : solve[UP].num_rb);
+	solve[UP].num_ra -= solve[UP].num_rr;
+	solve[UP].num_rb -= solve[UP].num_rr;
+	solve[UP].num_all = solve[UP].num_ra + solve[UP].num_rb + solve[UP].num_rr;
+	solve[DOWN].num_rra = s->size_a - get_insert_index(&s->a, num);
+	solve[DOWN].num_rrb = s->size_b - i;
+	solve[DOWN].num_rrr = (solve[DOWN].num_rrb > solve[DOWN].num_rra ?
+	solve[DOWN].num_rra : solve[DOWN].num_rrb);
+	solve[DOWN].num_rra -= solve[DOWN].num_rrr;
+	solve[DOWN].num_rrb -= solve[DOWN].num_rrr;
+	solve[DOWN].num_all = solve[DOWN].num_rra + solve[DOWN].num_rrb +
+	solve[DOWN].num_rrr;
+}
+
+static void				second_step(t_solution *solve, size_t i, t_stack *s,
+						int num)
+{
+	solve[UP_DOWN].num_ra = get_insert_index(&s->a, num);
+	solve[UP_DOWN].num_rrb = s->size_b - i;
+	solve[UP_DOWN].num_all = solve[UP_DOWN].num_ra + solve[UP_DOWN].num_rrb;
+	solve[DOWN_UP].num_rra = s->size_a - get_insert_index(&s->a, num);
+	solve[DOWN_UP].num_rb = i;
+	solve[DOWN_UP].num_all = solve[DOWN_UP].num_rra + solve[DOWN_UP].num_rb;
+}
+
+static t_solution		get_solution(t_stack *stacks, int num, size_t i)
+{
+	t_solution			solve[4];
 	t_direction			cur_dir;
 	t_direction			best_dir;
 	int					min_cmd;
 
 	ft_bzero(solve, sizeof(t_solution) * 4);
-	solve[UP].num_rb = i;
-	solve[UP].num_ra = get_insert_index(&stacks->a, num);
-	solve[UP].num_rr = (solve[UP].num_rb > solve[UP].num_ra ? solve[UP].num_ra : solve[UP].num_rb);
-	solve[UP].num_ra -= solve[UP].num_rr;
-	solve[UP].num_rb -= solve[UP].num_rr;
-	solve[UP].num_all = solve[UP].num_ra + solve[UP].num_rb + solve[UP].num_rr;
-
-	solve[DOWN].num_rra = stacks->size_a - get_insert_index(&stacks->a, num);
-	solve[DOWN].num_rrb = stacks->size_b - i;
-	solve[DOWN].num_rrr = (solve[DOWN].num_rrb > solve[DOWN].num_rra ? solve[DOWN].num_rra : solve[DOWN].num_rrb);
-	solve[DOWN].num_rra -= solve[DOWN].num_rrr;
-	solve[DOWN].num_rrb -= solve[DOWN].num_rrr;
-	solve[DOWN].num_all = solve[DOWN].num_rra + solve[DOWN].num_rrb + solve[DOWN].num_rrr;
-
-	solve[UP_DOWN].num_ra = get_insert_index(&stacks->a, num);
-	solve[UP_DOWN].num_rrb = stacks->size_b - i;
-	solve[UP_DOWN].num_all = solve[UP_DOWN].num_ra + solve[UP_DOWN].num_rrb;
-
-	solve[DOWN_UP].num_rra = stacks->size_a - get_insert_index(&stacks->a, num);
-	solve[DOWN_UP].num_rb = i;
-	solve[DOWN_UP].num_all = solve[DOWN_UP].num_rra + solve[DOWN_UP].num_rb;
-
+	first_step(solve, i, stacks, num);
+	second_step(solve, i, stacks, num);
 	cur_dir = FIRST;
 	min_cmd = solve[FIRST].num_all;
 	best_dir = cur_dir;
-	while(cur_dir <= LAST)
+	while (cur_dir <= LAST)
 	{
 		if (solve[cur_dir].num_all < min_cmd)
 		{
