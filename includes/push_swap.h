@@ -75,6 +75,7 @@ int					init_args(t_args *args, size_t size);
 int					read_commands(t_lst **head_a, t_lst **head_b);
 int					args_to_array(t_lst **head, t_args *args);
 int					list_is_sorted(t_lst *head);
+int					get_insert_index(t_lst **head_a, int num);
 
 int					ft_error(void);
 void				sort_3_numbers(t_lst **h);

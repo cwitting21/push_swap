@@ -6,26 +6,11 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:32:37 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 06:55:10 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 08:23:19 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-static int				get_insert_index(t_lst **head_a, int num)
-{
-	t_lst				*cur;
-	size_t				i;
-
-	i = 0;
-	cur = (*head_a);
-	while (cur->value < num || cur->prev->value > num)
-	{
-		cur = cur->next;
-		++i;
-	}
-	return (i);
-}
 
 static void				first_step(t_solution *solve, size_t i, t_stack *s,
 						int num)
@@ -91,7 +76,8 @@ static t_solution		check_stack_b(t_stack *stacks)
 	size_t				i;
 	t_lst				*end_b;
 
-	// init sols ;
+	ft_bzero(&best_sol, sizeof(t_solution));
+	ft_bzero(&cur_sol, sizeof(t_solution));
 	i = 0;
 	end_b = stacks->b;
 	size = stacks->size_b;
