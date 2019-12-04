@@ -86,6 +86,11 @@ void				sort_lists_hard(t_lst **head_a, t_lst **head_b, t_args *args);
 void				leave_3_nbrs_in_a(t_lst **head_a, t_lst **head_b, t_args *args);
 void				*from_a_to_b(t_args *args, t_lst **head_a, t_lst **head_b);
 void				spin_stack(t_stack *stacks, t_solution sol);
+void		case_1_simpsort(t_lst **head_a, t_lst **head_b, t_args *args);
+void		case_2_simpsort(t_lst **head_a, t_lst **head_b);
+void		case_3_simpsort(t_lst **head_a, t_lst **head_b, t_args *args);
+void		case_4_simpsort(t_lst **head_a, t_lst **head_b, t_lst *end_a);
+
 
 
 void				print_stacks(t_lst **head_a, t_lst **head_b);
@@ -93,5 +98,9 @@ void				print_stacks(t_lst **head_a, t_lst **head_b);
 
 t_lst				*new_lst(int value);
 t_bool				array_is_sorted(int *arr);
+
+size_t		get_insert_index_simple_max(t_lst **h, t_args *args);
+size_t	get_index_simple_sort(t_lst **head, t_args *args);
+
 
 #endif

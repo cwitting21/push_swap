@@ -24,7 +24,8 @@ SOURCE := 	new_lst.c args_to_lst.c pb.c pa.c swap.c ss.c rotate.c rr.c \
 			sort_3_numbers.c read_commands.c ft_error.c args_to_array.c \
 			array_is_sorted.c destroy_stacks.c sort_5_numbers.c final_sort.c \
 			sort_lists_hard.c from_a_to_b.c leave_3_nbrs_in_a.c list_is_sorted.c \
-			print_stacks.c spin_stack.c get_insert_index.c
+			print_stacks.c spin_stack.c get_insert_index.c cases_simple_sort.c \
+			get_insert_index_simpsort.c 
 
 
 SRC := $(addprefix $(SRC_DIR), $(SOURCE))

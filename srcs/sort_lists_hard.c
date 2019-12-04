@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:32:37 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 08:23:19 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/04 09:07:17 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,13 @@ static t_solution		check_stack_b(t_stack *stacks)
 	return (best_sol);
 }
 
-void		sort_lists_hard(t_lst **head_a, t_lst **head_b, t_args *args)
+void					sort_lists_hard(t_lst **head_a, t_lst **head_b,
+						t_args *args)
 {
-	t_lst		*end_a;
-	size_t		b_size;
-	t_solution	sol;
-	t_stack		stacks;
+	t_lst				*end_a;
+	size_t				b_size;
+	t_solution			sol;
+	t_stack				stacks;
 
 	b_size = (*head_b)->size;
 	stacks.size_a = (*head_a)->size;
