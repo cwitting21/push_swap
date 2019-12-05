@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:29:40 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 05:42:03 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/05 21:30:23 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	case_1(t_lst **head)
 {
 	rev_rotate(head);
-	printf("rra\n");
+	ft_printf("rra\n");
 }
 
 static void	case_2(t_lst **head)
 {
 	rotate(head);
-	printf("ra\n");
+	ft_printf("ra\n");
 }
 
 void		final_sort(t_lst **head, t_args *args)

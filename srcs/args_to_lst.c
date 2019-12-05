@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args_to_lst.c                                      :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwitting <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/04 20:45:29 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 20:50:44 by cwitting         ###   ########.fr       */
+/*   Created: 2019/12/05 23:22:34 by cwitting          #+#    #+#             */
+/*   Updated: 2019/12/05 23:30:21 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static long long int		ft_atoi_local(const char *str, int neg)
+static long long	ft_atoi_local(const char *str, int neg)
 {
-	int 					i;
-	long long int 			res;
+	int				i;
+	long long		res;
 
 	i = 0;
 	res = 0;
@@ -30,11 +30,11 @@ static long long int		ft_atoi_local(const char *str, int neg)
 	return (res * neg);
 }
 
-static int					check_if_nbr_is_valid(char *ptr)
+static int			check_if_nbr_is_valid(char *ptr)
 {
-	int						minus;
-	char					*tmp;
-	int						i;
+	int				minus;
+	char			*tmp;
+	int				i;
 
 	i = 0;
 	if (*ptr == '-')
@@ -47,15 +47,15 @@ static int					check_if_nbr_is_valid(char *ptr)
 	if (*ptr == '+')
 		ptr++;
 	if (ft_atoi_local(ptr, minus) >= 2147483648 ||
-		ft_atoi_local(ptr, minus) <= -2147483649)
+	ft_atoi_local(ptr, minus) <= -2147483649)
 		return (0);
 	return (1);
 }
 
-static int					args_are_garbage(int ac, char **av)
+static int			args_are_garbage(int ac, char **av)
 {
-	char					*ptr;
-	int						i;
+	char			*ptr;
+	int				i;
 
 	i = 0;
 	while (++i < ac)
@@ -73,10 +73,10 @@ static int					args_are_garbage(int ac, char **av)
 	return (0);
 }
 
-static int					valid_args(char *ptr, int ac, char  **av)
+static int			valid_args(char *ptr, int ac, char **av)
 {
-	int						i;
-	char					*tmp;
+	int				i;
+	char			*tmp;
 
 	i = 0;
 	tmp = ptr;
@@ -90,7 +90,7 @@ static int					valid_args(char *ptr, int ac, char  **av)
 		{
 			if ((*ptr == '-' || *ptr == '+') && !ft_isdigit(*(ptr + 1)))
 				return (0);
-			if (!((*ptr >= 0 + '0' && *ptr <= 9 + '0') || *ptr != ' ' || 
+			if (!((*ptr >= 0 + '0' && *ptr <= 9 + '0') || *ptr != ' ' ||
 			*ptr != '"' || ((*ptr != '+' || *ptr != '-')
 			&& ft_isdigit(*(ptr + 1)))))
 				return (0);
@@ -100,10 +100,10 @@ static int					valid_args(char *ptr, int ac, char  **av)
 	return (1);
 }
 
-int							args_to_lst(int ac, char **av, t_lst **head)
+int					args_to_lst(int ac, char **av, t_lst **head)
 {
-	int						i;
-	char					*ptr;
+	int				i;
+	char			*ptr;
 
 	i = 0;
 	if (args_are_garbage(ac, av))

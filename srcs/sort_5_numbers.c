@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:28:06 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 09:49:11 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/05 21:29:52 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void			sort_5_numbers(t_lst **head_a, t_lst **head_b, t_args *args)
 	while ((*head_a)->size > 3)
 	{
 		pb(head_a, head_b);
-		printf("pb\n");
+		ft_printf("pb\n");
 	}
 	sort_3_numbers(head_a);
 	tmp = (*head_a)->size;

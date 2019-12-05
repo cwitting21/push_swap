@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:13:06 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 20:26:41 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/06 01:27:49 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ static void		null_args(t_stack *stack)
 	stack->b = NULL;
 }
 
+static void		choose_case(t_stack *s, t_args *args)
+{
+	if (s->a->size > 5)
+	{
+		from_a_to_b(args, &s->a, &s->b);
+		sort(&s->a, &s->b, args);
+	}
+	else if (s->a->size == 2)
+		sort_2(&s->a);
+	else if (s->a->size == 3)
+		sort_3_numbers(&s->a);
+	else if (s->a->size > 3 && s->a->size <= 5)
+		sort_5_numbers(&s->a, &s->b, args);
+}
+
 int				main(int ac, char **av)
 {
 	t_stack		s;
@@ -38,18 +53,9 @@ int				main(int ac, char **av)
 		|| !(init_args(&args, s.a->size)) || !(args_to_array(&s.a, &args)))
 			return (ft_error());
 		if (!list_is_sorted(s.a))
-		{
-			if (s.a->size > 5)
-			{
-				from_a_to_b(&args, &s.a, &s.b);
-				sort(&s.a, &s.b, &args);
-			}
-			else if (s.a->size == 3)
-				sort_3_numbers(&s.a);
-			else if (s.a->size > 3 && s.a->size <= 5)
-				sort_5_numbers(&s.a, &s.b, &args);
-		}
+			choose_case(&s, &args);
 		free(args.arr);
 	}
 	exit(EXIT_SUCCESS);
+	return (0);
 }

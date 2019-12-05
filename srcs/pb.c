@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:42:34 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 11:15:51 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/05 18:45:07 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ int				pb(t_lst **head_a, t_lst **head_b)
 	t_lst		*end_a;
 
 	end_a = (*head_a)->prev;
-	if (!*head_b && (*head_a)->size >= 3)
+	if (!*head_b && (*head_a)->size > 3)
 	{
 		stack_b_is_empty(head_a, head_b, end_a);
 		return (1);
 	}
-	if (*head_b && (*head_a)->size >= 3)
+	if (*head_b && (*head_a)->size > 3)
 	{
 		stack_b_not_empty(head_a, head_b, end_a);
 		return (1);

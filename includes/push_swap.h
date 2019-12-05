@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/05 22:38:38 by cwitting          #+#    #+#             */
+/*   Updated: 2019/12/05 23:06:56 by cwitting         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
 # include "../libft/libft.h"
+# include "../lft_printf/includes/ft_printf.h"
 # include <stdio.h>
 # include <unistd.h>
 
@@ -44,27 +57,27 @@ typedef struct		s_solution
 	int				num_all;
 }					t_solution;
 
-typedef enum		e_bool
+typedef	enum		e_bool
 {
-					true = 1,
-					false = !true
+	true = 1,
+	false = !true
 }					t_bool;
 
-typedef enum		e_direction
+typedef	enum		e_direction
 {
-					UP = 0,
-					DOWN = 1,
-					UP_DOWN = 2,
-					DOWN_UP = 3,
-					FIRST = UP,
-					LAST = DOWN_UP
+	UP = 0,
+	DOWN = 1,
+	UP_DOWN = 2,
+	DOWN_UP = 3,
+	FIRST = UP,
+	LAST = DOWN_UP
 }					t_direction;
 
 int					args_to_lst(int ac, char **av, t_lst **head);
 int					pb(t_lst **head_a, t_lst **head_b);
 int					pa(t_lst **head_a, t_lst **head_b);
 int					swap(t_lst **head);
-int         		ss(t_lst **head_a, t_lst **head_b);
+int					ss(t_lst **head_a, t_lst **head_b);
 int					rotate(t_lst **head);
 int					rr(t_lst **head_a, t_lst **head_b);
 int					rev_rotate(t_lst **head);
@@ -78,29 +91,31 @@ int					list_is_sorted(t_lst *head);
 int					get_insert_index(t_lst **head_a, int num);
 int					ft_error(void);
 int					num_is_valid(char *ptr);
-
-
+int					ft_printf(const char *format, ...);
 void				sort_3_numbers(t_lst **h);
 void				destroy_stacks(t_stack *stacks);
-void				sort_5_numbers(t_lst **head_a, t_lst **head_b, t_args *args);
+void				sort_5_numbers(t_lst **head_a, t_lst **head_b,
+					t_args *args);
 void				final_sort(t_lst **head, t_args *args);
-void				sort_lists_hard(t_lst **head_a, t_lst **head_b, t_args *args);
-void				leave_3_nbrs_in_a(t_lst **head_a, t_lst **head_b, t_args *args);
+void				sort_lists_hard(t_lst **head_a, t_lst **head_b,
+					t_args *args);
+void				leave_3_nbrs_in_a(t_lst **head_a, t_lst **head_b,
+					t_args *args);
 void				from_a_to_b(t_args *args, t_lst **head_a, t_lst **head_b);
 void				spin_stack(t_stack *stacks, t_solution sol);
-void				case_1_simpsort(t_lst **head_a, t_lst **head_b, t_args *args);
+void				case_1_simpsort(t_lst **head_a, t_lst **head_b,
+					t_args *args);
 void				case_2_simpsort(t_lst **head_a, t_lst **head_b);
-void				case_3_simpsort(t_lst **head_a, t_lst **head_b, t_args *args);
-void				case_4_simpsort(t_lst **head_a, t_lst **head_b, t_lst *end_a);
-
+void				case_3_simpsort(t_lst **head_a, t_lst **head_b,
+					t_args *args);
+void				case_4_simpsort(t_lst **head_a, t_lst **head_b,
+					t_lst *end_a);
+void				sort_2(t_lst **head);
 void				print_stacks(t_lst **head_a, t_lst **head_b);
-
 t_lst				*new_lst(int value);
 t_lst				*push_lst_to_end(t_lst *head, t_lst *new);
 t_bool				array_is_sorted(int *arr);
-
 size_t				get_insert_index_simple_max(t_lst **h, t_args *args);
 size_t				get_index_simple_sort(t_lst **head, t_args *args);
-
 
 #endif

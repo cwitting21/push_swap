@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wmaykit <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/04/05 14:46:47 by wmaykit           #+#    #+#              #
-#    Updated: 2019/05/25 15:50:21 by wmaykit          ###   ########.fr        #
+#    Created: 2019/12/05 20:24:22 by cwitting          #+#    #+#              #
+#    Updated: 2019/12/05 22:04:36 by cwitting         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-CC = gcc -g -O0
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = ft_atoi.c \
@@ -79,7 +79,7 @@ SRCS = ft_atoi.c \
 	   ft_swap.c \
 	   ft_tolower.c \
 	   ft_toupper.c \
-	   ft_isblank.c \
+	   ft_isblank.c 
 
 OBJS = ft_atoi.o \
 	   ft_printbits.o \
@@ -145,13 +145,17 @@ OBJS = ft_atoi.o \
 	   ft_swap.o \
 	   ft_tolower.o \
 	   ft_toupper.o \
-	   ft_isblank.o
+	   ft_isblank.o 
+
+CYAN = \033[0;36m
+RESET = \033[0m
 
 all:$(NAME)
 
 $(NAME):
-	@$(CC) $(CFLAGS) -c $(SRCS)
+	@$(CC) $(CFLAGS) -c $(SRCS) 
 	@ar rc $(NAME) $(OBJS)
+	@echo "$(CYAN)libft.a created$(RESET)"
 
 clean:
 	@rm -rf *.o

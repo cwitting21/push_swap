@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 06:42:28 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 10:36:54 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/05 22:32:35 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ static void		case_ra_rb(t_lst **head, int code)
 {
 	rotate(head);
 	if (code == 0)
-		printf("ra\n");
+		ft_printf("ra\n");
 	else if (code == 1)
-		printf("rb\n");
+		ft_printf("rb\n");
 }
 
 static void		case_rra_rrb(t_lst **head, int code)
 {
 	rev_rotate(head);
 	if (code == 0)
-		printf("rra\n");
+		ft_printf("rra\n");
 	else if (code == 1)
-		printf("rrb\n");
+		ft_printf("rrb\n");
 }
 
 void			spin_stack(t_stack *stacks, t_solution sol)
@@ -44,12 +44,12 @@ void			spin_stack(t_stack *stacks, t_solution sol)
 	{
 		rotate(&stacks->a);
 		rotate(&stacks->b);
-		printf("rr\n");
+		ft_printf("rr\n");
 	}
 	while (sol.num_rrr-- > 0)
 	{
 		rev_rotate(&stacks->a);
 		rev_rotate(&stacks->b);
-		printf("rrr\n");
+		ft_printf("rrr\n");
 	}
 }

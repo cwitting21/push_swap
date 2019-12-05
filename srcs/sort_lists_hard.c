@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/04 04:32:37 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 09:07:17 by cwitting         ###   ########.fr       */
+/*   Created: 2019/12/04 04:13:17 by cwitting          #+#    #+#             */
+/*   Updated: 2019/12/05 22:57:19 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void					sort_lists_hard(t_lst **head_a, t_lst **head_b,
 		sol = check_stack_b(&stacks);
 		spin_stack(&stacks, sol);
 		pa(&stacks.a, &stacks.b);
-		printf("pa\n");
+		ft_printf("pa\n");
 		--stacks.size_b;
 		++stacks.size_a;
 	}
