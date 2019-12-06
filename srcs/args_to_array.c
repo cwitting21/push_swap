@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:21:07 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 05:33:45 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/06 05:15:40 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static void			swap_sort(int *a, int *b)
 	*b = tmp;
 }
 
-static t_bool		arr_has_no_repetetive_vals(t_args *args)
+static t_bool		arr_has_no_repetetive_vals(t_args *args, size_t size)
 {
 	int				i;
 
 	i = 1;
-	while (args->arr[i])
+	while (i <= size)
 	{
 		if (args->arr[i - 1] == args->arr[i])
 			return (false);
@@ -65,7 +65,7 @@ static int			bubble_sort_arr_args(t_args *args, size_t size)
 		}
 	}
 	init_args_local(args, size, i);
-	if (!(arr_has_no_repetetive_vals(args)))
+	if (!(arr_has_no_repetetive_vals(args, size)))
 		return (0);
 	return (1);
 }

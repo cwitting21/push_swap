@@ -6,30 +6,17 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 20:37:20 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/04 20:39:26 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/06 06:20:49 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		num_is_valid(char *ptr)
-{
-	char		*tmp;
-
-	tmp = ptr;
-	while (*tmp && !ft_isblank(*tmp))
-	{
-		if (!(*tmp >= 0 + '0' && *tmp <= 9 + '0'))
-			return (0);
-		++tmp;
-	}
-	return (1);
-}
-
 t_lst	*push_lst_to_end(t_lst *head, t_lst *new)
 {
 	t_lst		*end;
 
+	end = NULL;
 	if (!head)
 	{
 		new->next = new;

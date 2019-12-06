@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:34:18 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/05 21:28:14 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/06 03:51:42 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		from_a_to_b(t_args *args, t_lst **head_a, t_lst **head_b)
 			|| (end_a->value == args->min_i || end_a->value == args->mid_i))
 			case_3(&end_a, &code);
 		if (code)
-			case_4(head_a);
+			case_4(&end_a);
 	}
 	(*head_a) = end_a;
 }
