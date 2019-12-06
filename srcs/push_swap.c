@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:13:06 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/06 03:30:31 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/06 08:14:50 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,10 @@ int				main(int ac, char **av)
 	{
 		if (!(args_to_lst(ac, av, &s.a))
 		|| !(init_args(&args, s.a->size)) || !(args_to_array(&s.a, &args)))
-			return (ft_error());
+			return (ft_error_and_free(s.a, &args));
 		if (!list_is_sorted(s.a))
 			choose_case(&s, &args);
 		free(args.arr);
 	}
 	exit(EXIT_SUCCESS);
-	return (0);
 }

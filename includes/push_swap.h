@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 22:38:38 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/06 06:13:46 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/06 08:30:33 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int					get_insert_index(t_lst **head_a, int num);
 int					ft_error(void);
 int					ft_printf(const char *format, ...);
 int					ft_error_and_free(t_lst *head, t_args *args);
+int					str_del_and_ret_1(char **line);
 void				sort_3_numbers(t_lst **h);
 void				destroy_stacks(t_stack *stacks);
 void				sort_5_numbers(t_lst **head_a, t_lst **head_b,
@@ -111,6 +112,7 @@ void				case_4_simpsort(t_lst **head_a, t_lst **head_b,
 					t_lst *end_a);
 void				sort_2(t_lst **head);
 void				print_stacks(t_lst **head_a, t_lst **head_b);
+void				init_args_read_cmd(char **line, int *tmp, int *error);
 t_lst				*new_lst(int value);
 t_lst				*push_lst_to_end(t_lst *head, t_lst *new);
 t_bool				array_is_sorted(int *arr);

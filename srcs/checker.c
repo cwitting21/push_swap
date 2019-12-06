@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:42:58 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/06 06:29:37 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/06 08:33:32 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		clean_one_stack(t_lst *head, size_t size)
 	}
 }
 
-static void			clean_local(t_lst *h_a, t_lst *h_b, t_args *args)
+static void		clean_local(t_lst *h_a, t_lst *h_b, t_args *args)
 {
 	free(args->arr);
 	clean_one_stack(h_a, h_a->size);
@@ -33,7 +33,7 @@ static void			clean_local(t_lst *h_a, t_lst *h_b, t_args *args)
 		clean_one_stack(h_b, h_b->size);
 }
 
-int					main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_lst		*head;
 	t_stack		stack;

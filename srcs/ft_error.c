@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:17:49 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/06 06:29:47 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/06 08:03:59 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,11 @@ int				ft_error_and_free(t_lst *head, t_args *args)
 	write(1, "Error\n", 6);
 	if (args)
 	{
-		printf("-------------------------------------------------------\n");
-		// args = NULL;
 		free(args->arr);
+		args = NULL;
 	}
 	if (head)
-	{
-		printf("-------------------------------------------------------\n");
 		clean_one_stack(head, head->size);
-	}
 	return (0);
 }
 
