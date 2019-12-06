@@ -6,7 +6,7 @@
 #    By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 20:24:22 by cwitting          #+#    #+#              #
-#    Updated: 2019/12/05 20:24:24 by cwitting         ###   ########.fr        #
+#    Updated: 2019/12/05 22:04:36 by cwitting         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -147,11 +147,15 @@ OBJS = ft_atoi.o \
 	   ft_toupper.o \
 	   ft_isblank.o 
 
+CYAN = \033[0;36m
+RESET = \033[0m
+
 all:$(NAME)
 
 $(NAME):
 	@$(CC) $(CFLAGS) -c $(SRCS) 
 	@ar rc $(NAME) $(OBJS)
+	@echo "$(CYAN)libft.a created$(RESET)"
 
 clean:
 	@rm -rf *.o
