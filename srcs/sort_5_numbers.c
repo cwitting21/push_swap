@@ -6,11 +6,24 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:28:06 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/05 21:29:52 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/07 22:46:45 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+static void		clean_one_stack(t_lst *head, size_t size)
+{
+	if (size)
+	{
+		clean_one_stack(head->next, size - 1);
+		if (head)
+		{
+			head = NULL;
+			free(head);
+		}
+	}
+}
 
 static int		is_smallest(t_lst **head_a, int val)
 {
@@ -65,4 +78,7 @@ void			sort_5_numbers(t_lst **head_a, t_lst **head_b, t_args *args)
 	while (tmp++ < 5 && (*head_b))
 		sort_lists_simple(head_a, head_b, args);
 	final_sort(head_a, args);
+	clean_one_stack(*head_a, (*head_a)->size);
+	if (*head_b && head_b)
+		clean_one_stack(*head_b, (*head_b)->size);
 }

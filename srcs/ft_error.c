@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:17:49 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/06 08:03:59 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/07 23:17:56 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ static void		clean_one_stack(t_lst *head, size_t size)
 int				ft_error_and_free(t_lst *head, t_args *args)
 {
 	write(1, "Error\n", 6);
-	if (args)
-	{
-		free(args->arr);
-		args = NULL;
-	}
 	if (head)
 		clean_one_stack(head, head->size);
 	return (0);

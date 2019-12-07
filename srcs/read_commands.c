@@ -6,7 +6,7 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:15:52 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/06 08:33:15 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/07 23:39:59 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,18 @@ int				read_commands(t_lst **head_a, t_lst **head_b)
 	init_args_read_cmd(&line, &tmp, &error);
 	while ((tmp = get_next_line(0, &line)) == 1)
 	{
+		// printf("111\n");
 		case_1_local(head_a, head_b, line);
 		case_2_local(head_a, head_b, line);
 		error = case_3_local(head_a, head_b, line);
+		// printf("11111\n");
 		if (error == 0)
-			return (0);
+			exit(EXIT_FAILURE);
 	}
 	ft_strdel(&line);
-	if (tmp == -1 || error == 0)
+	if (tmp == -1)
 		return (0);
 	if (get_next_line(0, &line) == 0)
 		return (str_del_and_ret_1(&line));
-	ft_strdel(&line);
-	return (0);
+	return (1);
 }

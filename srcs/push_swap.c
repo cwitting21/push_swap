@@ -6,11 +6,24 @@
 /*   By: cwitting <cwitting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 04:13:06 by cwitting          #+#    #+#             */
-/*   Updated: 2019/12/06 08:14:50 by cwitting         ###   ########.fr       */
+/*   Updated: 2019/12/07 22:43:03 by cwitting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+static void		clean_one_stack(t_lst *head, size_t size)
+{
+	if (size)
+	{
+		clean_one_stack(head->next, size - 1);
+		if (head)
+		{
+			head = NULL;
+			free(head);
+		}
+	}
+}
 
 static void		sort(t_lst **head_a, t_lst **head_b, t_args *args)
 {
@@ -35,7 +48,10 @@ static void		choose_case(t_stack *s, t_args *args)
 	else if (s->a->size == 2)
 		sort_2(&s->a);
 	else if (s->a->size == 3)
+	{
 		sort_3_numbers(&s->a);
+		clean_one_stack(s->a, s->a->size);
+	}
 	else if (s->a->size > 3 && s->a->size <= 5)
 		sort_5_numbers(&s->a, &s->b, args);
 }
